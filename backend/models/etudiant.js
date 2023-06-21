@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-const db = require('../config/db');
+const { Schema, model } = require('mongoose');
 
-const Schema = mongoose.Schema;
 
 const EtudiantSchema = new Schema({
   nom: { type: String, required: true },

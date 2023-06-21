@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const db = require('../config/db'); 
+const { Schema, model } = require('mongoose');
 
 const CompetenceSchema = new mongoose.Schema({
   nom: {

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Enseignant = require("../models/Compentence");
+const Competence = require("../models/Competence");
 // Route pour créer une nouvelle compétence
 router.post('/competence/new', async (req, res) => {
     try {
@@ -32,4 +32,13 @@ router.post('/competence/new', async (req, res) => {
       res.status(500).json({ error: 'Erreur lors de la récupération des compétences' });
     }
   });
+  // GET - Récupérer toutes les compétences
+router.get('/competences', async (req, res) => {
+  try {
+    const competences = await Competence.find();
+    res.json(competences);
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la récupération des compétences' });
+  }
+});
   module.exports = router;

@@ -30,14 +30,16 @@ const authRoutes = require('./backend/routes/authRoutes');
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 // Import des routes
-const etudiantRoutes = require('./routes/etudiant');
-const enseignantRoutes = require('./routes/enseignant');
-const projetRoutes = require('./routes/projet');
-const competenceRoutes = require('./routes/competences');
+const etudiantRoutes = require('./backend/routes/etudiant');
+const enseignantRoutes = require('./backend/routes/enseignant');
+const projetRoutes = require('./backend/routes/projet');
+const competenceRoutes = require('./backend/routes/competence');
+const resultatRoutes = require('./backend/routes/resultat');
 app.use('/api/etudiants', etudiantRoutes);
 app.use('/api/enseignants', enseignantRoutes);
 app.use('/api/projets', projetRoutes);
-app.use('/api/competences', competenceRoutes);
+app.use('/api/competence', competenceRoutes);
+app.use('/api/resultat', resultatRoutes);
 
 
 

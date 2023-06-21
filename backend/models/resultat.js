@@ -12,6 +12,7 @@ const ResultatSchema = new Schema({
   etudiant: { type: Schema.Types.ObjectId, ref: 'Etudiant', required: true },
   competence: { type: Schema.Types.ObjectId, ref: 'Competence', required: true },
   resultat: { type: String, enum: Object.values(ResultatEnum), required: true },
+  note: { type:  Number},
 });
 
 module.exports = mongoose.model('Resultat', ResultatSchema);
