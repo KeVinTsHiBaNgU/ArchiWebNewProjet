@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Etudiant = require('../models/etudiant');
+const Etudiant = require('../models/User');
 
 // Route pour récupérer tous les étudiants
 router.get('/all/', async (req, res) => {

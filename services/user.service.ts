@@ -7,16 +7,25 @@ import { User } from '../backend/models/User';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api/';
+  private apiUrl = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
     // Assurez-vous d'ajuster l'URL en fonction de votre API
-    return this.http.get<User[]>(`${this.apiUrl}users/admin/users`);
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  }
+  getUser(userId: string): Observable<User[]> {
+    // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
+    // Assurez-vous d'ajuster l'URL en fonction de votre API
+    return this.http.get<User[]>(`${this.apiUrl}/${userId}`);
   }
 
   createUser(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}users/create`, userData);
+    return this.http.post(`${this.apiUrl}/create`, userData);
+  }
+  getUserRole(userId: string): Observable<any> {
+    const url = `${this.apiUrl}/${userId}/role`;
+    return this.http.get<any>(url);
   }
 }

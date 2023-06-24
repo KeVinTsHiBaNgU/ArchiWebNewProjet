@@ -2,16 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Competence = require("../models/Competence");
 // Route pour créer une nouvelle compétence
-router.post('/competence/new', async (req, res) => {
+router.post('/new', async (req, res) => {
     try {
       const { nom, description, competencesRequises, niveau, parent } = req.body;
   
       const nouvelleCompetence = new Competence({
         nom,
-        description,
-        competencesRequises,
-        niveau,
-        parent
+        description
       });
   
       const competenceCreee = await nouvelleCompetence.save();
@@ -21,11 +18,9 @@ router.post('/competence/new', async (req, res) => {
       res.status(500).json({ error: 'Erreur lors de la création de la compétence' });
     }
   });
-  router.get('/competences/:id', async (req, res) => {
+  router.get('/:id', async (req, res) => {
     try {
-      const competence = await Competence.findById(req.params.id)
-        .populate('parent', 'nom') // Population de la compétence parent avec le champ 'nom'
-        .populate('competencesRequises', 'nom'); // Population des compétences prérequises avec le champ 'nom'
+      const competence = await Competence.findById(req.params.id);
   
       res.json(competence);
     } catch (error) {
@@ -33,7 +28,7 @@ router.post('/competence/new', async (req, res) => {
     }
   });
   // GET - Récupérer toutes les compétences
-router.get('/competences', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const competences = await Competence.find();
     res.json(competences);

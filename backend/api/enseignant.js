@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Enseignant = require("../models/enseignant");
+const Enseignant = require("../models/User");
 
 // Récupérer tous les enseignants
 router.get("/all", async (req, res) => {

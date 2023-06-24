@@ -18,11 +18,11 @@ function generateUniqueUserId() {
 }
 
 // Route pour la création d'un utilisateur par l'administrateur
-router.post('/create', authMiddleware, async (req, res) => {
+router.post('/create',  async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
     
-    const id_user = generateUniqueUserId();
+    
     
     const hashedPassword = await bcrypt.hash(password, 10);
     
@@ -31,7 +31,6 @@ router.post('/create', authMiddleware, async (req, res) => {
       email,
       password: hashedPassword,
       role,
-      id_user
     });
 
     await newUser.save();
@@ -44,13 +43,13 @@ router.post('/create', authMiddleware, async (req, res) => {
 
 
 // Route pour récupérer les utilisateurs étudiants et enseignants
-  router.get('/admin/users', authMiddleware, async (req, res) => {
+  router.get('/users',  async (req, res) => {
     try {
       // Vérifier le rôle de l'utilisateur authentifié (administrateur)
-      console.log(req.user.role);
-      if (req.user.role !== 'admin') {
-        return res.status(403).json({ message: 'Accès non autorisé' });
-      }
+      //console.log(req.user.role);
+      //if (req.user.role !== 'admin') {
+       // return res.status(403).json({ message: 'Accès non autorisé' });
+      //}
       
       // Récupérer les utilisateurs ayant le rôle "étudiant" ou "enseignant"
       const users = await User.find({ role: { $in: ['student', 'teacher'] } });
@@ -61,7 +60,35 @@ router.post('/create', authMiddleware, async (req, res) => {
         res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
       }
     });
-    
+    // Récupérer le rôle de l'utilisateur par son ID
+router.get('/:id/role', (req, res) => {
+  const userId = req.params.id;
+
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'Utilisateur non trouvé' });
+      }
+
+      res.json({ role: user.role });
+    })
+    .catch(err => res.status(500).json({ error: err.message }));
+});
+// Récupérer le rôle de l'utilisateur par son ID
+router.get('/:id', (req, res) => {
+  const userId = req.params.id;
+
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'Utilisateur non trouvé' });
+      }
+
+      res.json({ user: user });
+    })
+    .catch(err => res.status(500).json({ error: err.message }));
+});
+
   
   // Route pour récupérer les étudiants et les enseignants pour le tableau de bord de l'administrateur
   // Route pour récupérer les utilisateurs étudiants et enseignants pour le tableau de bord de l'administrateur

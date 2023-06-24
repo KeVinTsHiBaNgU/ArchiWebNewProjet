@@ -15,26 +15,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configuration CORS
-// app.use(cors({
-//   origin: 'http://localhost:4200',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+ }));
 
-app.use(cors());
-app.use(authMiddleware);
+//app.use(cors());
+//app.use(authMiddleware);
 
 // Utiliser les routes de l'utilisateur
-const userRoutes = require('./backend/routes/UserRoutes');
-const authRoutes = require('./backend/routes/authRoutes');
-app.use('/api/users', userRoutes);
+const userRoutes = require('./backend/api/UserRoutes');
+const authRoutes = require('./backend/api/authRoutes');
+app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 // Import des routes
-const etudiantRoutes = require('./backend/routes/etudiant');
-const enseignantRoutes = require('./backend/routes/enseignant');
-const projetRoutes = require('./backend/routes/projet');
-const competenceRoutes = require('./backend/routes/competence');
-const resultatRoutes = require('./backend/routes/resultat');
+const etudiantRoutes = require('./backend/api/etudiant');
+const enseignantRoutes = require('./backend/api/enseignant');
+const projetRoutes = require('./backend/api/projet');
+const competenceRoutes = require('./backend/api/competence');
+const resultatRoutes = require('./backend/api/resultat');
 app.use('/api/etudiants', etudiantRoutes);
 app.use('/api/enseignants', enseignantRoutes);
 app.use('/api/projets', projetRoutes);

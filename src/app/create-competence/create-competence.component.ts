@@ -12,6 +12,11 @@ import { CompetenceService } from '../../../services/competence.service';
 export class CreateCompetenceComponent { competenceForm: FormGroup = new FormGroup({});
 
   competences: any[] = []; // Tableau contenant les compétences existantes en base
+  nom?: string;
+  description?: string;
+  competencesRequises?: any[]=[[]];
+  niveau?: number;
+  parent?:any;
 
 constructor(private formBuilder: FormBuilder, private competenceService: CompetenceService) { }
 
@@ -35,7 +40,14 @@ ngOnInit() {
 }
 
 onSubmit() {
-  this.competenceService.createCompetence(this.competenceForm.value).subscribe(
+  let competence ={
+    "nom":this.nom,
+    
+    "description":this.description
+ 
+
+  }
+  this.competenceService.createCompetence(competence).subscribe(
     data => {
       console.log('Compétence créée avec succès');
       // Réinitialiser le formulaire

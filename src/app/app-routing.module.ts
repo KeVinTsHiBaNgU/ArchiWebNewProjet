@@ -1,3 +1,5 @@
+import { CreateUserComponent } from './create-user/create-user.component';
+import { CreateProjetComponent } from './create-projet/create-projet.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from '../../components/admin-login/admin-login.component'; // Importer le composant
@@ -7,7 +9,9 @@ import { CreateCompetenceComponent } from './create-competence/create-competence
 const routes: Routes = [
   { path: "login", component: AdminLoginComponent },
   { path: "dashboard", component: AdminDashboardComponent },
-  { path: "competence/new/he", component:  CreateCompetenceComponent }
+  { path: "competence/new", component:  CreateCompetenceComponent },
+  { path: "projet/new/:id", component:  CreateProjetComponent },
+  { path: "user/new", component:  CreateUserComponent }
  
 ];
 

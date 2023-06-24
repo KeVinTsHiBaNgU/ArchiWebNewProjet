@@ -10,9 +10,7 @@ const CompetenceSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  competencesRequises: [{ type: Schema.Types.ObjectId, ref: 'Competence' }],
-  niveau: { type: Number, required: true },
-  parent: { type: Schema.Types.ObjectId, ref: 'Competence' }
+ 
 });
 
 module.exports = mongoose.model('Competence', CompetenceSchema);

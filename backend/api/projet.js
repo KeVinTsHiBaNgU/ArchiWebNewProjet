@@ -3,9 +3,9 @@ const router = express.Router();
 const Projet = require('../models/projet');
 
 // Route pour créer un projet
-router.post('/', (req, res) => {
-  const { nom, description, enseignant } = req.body;
-  const nouveauProjet = new Projet({ nom, description, enseignant });
+router.post('/new', (req, res) => {
+  const { nom, description, enseignant,competences } = req.body;
+  const nouveauProjet = new Projet({ nom, description, enseignant, competences });
 
   nouveauProjet.save()
     .then(projet => res.status(201).json(projet))

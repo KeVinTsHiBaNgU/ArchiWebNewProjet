@@ -10,18 +10,18 @@ const ProjetSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  competencesAcquises: [{
+  competences: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Competence'
   }],
   enseignant: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Enseignant',
+    ref: 'User',
     required: true
   },
   etudiantsInscrits: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Etudiant'
+    ref: 'User'
   }]  
 });
 

@@ -1,15 +1,4 @@
-<!-- <h2>Liste des utilisateurs</h2>
 
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.name }} - {{ user.role }}
-  </li>
-</ul>
-
-<button (click)="openUserModal()">Ajouter utilisateur</button>
-
-
- -->
  <div class="container">
   <h1>Admin Dashboard</h1>
 
@@ -17,8 +6,8 @@
   <table id="userTable" class="table">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Nom</th>
+        <th>role</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -33,5 +22,5 @@
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-primary mb-3" (click)="openUserModal()">Ajouter un utilisateur</button>
+  <a href="/user/new"><button class="btn btn-primary mb-3" >Ajouter un utilisateur</button></a>
 </div>

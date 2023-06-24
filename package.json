@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "datatables.net": "^1.13.4",
     "datatables.net-bs5": "^1.13.4",
+    "expre": "^0.1.1",
     "express": "^4.18.2",
     "jquery": "^3.7.0",
     "jsonwebtoken": "^9.0.0",

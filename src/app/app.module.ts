@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './../../components/admin-dashboard/admin-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,9 +11,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLoginComponent } from '../../components/admin-login/admin-login.component';
-import { AdminDashboardComponent } from '../../components/admin-dashboard/admin-dashboard.component';
-import { UserModalComponent } from '../../components/user-modal/user-modal.component';
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
+import { CreateProjetComponent } from './create-projet/create-projet.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+
 
 
 
@@ -32,8 +34,10 @@ import { CreateCompetenceComponent } from './create-competence/create-competence
   declarations: [
     AppComponent,
     CreateCompetenceComponent,
-    UserModalComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    CreateProjetComponent,
+    CreateUserComponent,
+    AdminDashboardComponent
     
   ],
   providers: [],

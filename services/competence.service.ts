@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompetenceService {
-  private apiUrl = 'http://localhost:4200/backend/api/competence'; // Remplacez l'URL par celle de votre API
+  private apiUrl = 'http://localhost:3000/api/competence'; 
 
   constructor(private http: HttpClient) { }
 
@@ -18,10 +18,10 @@ export class CompetenceService {
   }
   
   getAllCompetences(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.apiUrl}/`);
   }
 
   createCompetence(competence: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, competence);
+    return this.http.post(`${this.apiUrl}/new`, competence);
   }
 }
