@@ -18,6 +18,11 @@ export class UserService {
      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers });
   }
+
+  getEtudiants(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + '/etudiants');
+  }
+  
   getUser(userId: string): Observable<User[]> {
     // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
     // Assurez-vous d'ajuster l'URL en fonction de votre API

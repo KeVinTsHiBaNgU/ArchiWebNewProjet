@@ -1,9 +1,11 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjetService } from '../../../services/projet.service';
+import { ModalService } from '../../../services/modal.service';
 import { CompetenceService } from '../../../services/competence.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,8 +16,10 @@ import { ActivatedRoute } from '@angular/router';
 export class CreateProjetComponent implements OnInit {
   projetForm: FormGroup= new FormGroup({});
   competences: any[] = []; // Remplacer 'any' par le type approprié pour les compétences
-   id: any;
-  constructor(private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute) { }
+  id: any;
+  modalNouveauProjet: any;
+
+  constructor( private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -47,5 +51,7 @@ export class CreateProjetComponent implements OnInit {
     this.projetService.createProjet(projet).subscribe((data) => {
       // Traiter la réponse du serveur ou effectuer une action appropriée
     });
-  }
-}
+  }    
+      
+    }
+    

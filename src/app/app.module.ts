@@ -1,4 +1,5 @@
 import { AdminDashboardComponent } from './../../components/admin-dashboard/admin-dashboard.component';
+import { EnseignantDashboardComponent } from './../../components/enseignant-dashboard/enseignant-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,8 @@ import { CreateCompetenceComponent } from './create-competence/create-competence
 import { CreateProjetComponent } from './create-projet/create-projet.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { ViewProjetComponent } from './view-projet/view-projet.component';
+import { ViewCompetenceComponent } from './view-competence/view-competence.component';
 
 
 
@@ -39,7 +42,10 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     CreateProjetComponent,
     CreateUserComponent,
     AdminDashboardComponent,
+    EnseignantDashboardComponent,
     StudentDashboardComponent,
+    ViewProjetComponent,
+    ViewCompetenceComponent,
     
   ],
   providers: [],

@@ -61,7 +61,7 @@ function redirectUserByRole(role) {
   if (role === 'admin') {
     return '/dashboard'; // Redirection vers la page du tableau de bord de l'administrateur
   } else if (role === 'teacher') {
-    return '/teacher/dashboard'; // Redirection vers la page du tableau de bord de l'enseignant
+    return '/enseignant/dashboard'; // Redirection vers la page du tableau de bord de l'enseignant
   } else if (role === 'student') {
     return '/student/dashboard'; // Redirection vers la page du tableau de bord de l'étudiant
   } else {

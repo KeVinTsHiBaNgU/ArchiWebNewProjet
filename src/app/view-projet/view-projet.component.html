@@ -1,0 +1,27 @@
+<h2>Liste des projets</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Description</th>
+      <th scope="col">Enseignant</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let projet of projets">
+      <td>{{ projet.nom }}</td>
+      <td>{{ projet.description }}</td>
+      <td>{{ projet.enseignant.name }} {{ projet.enseignant.id }}</td>
+      <td>
+        <button class="btn btn-primary">Editer</button>
+        <button class="btn btn-danger">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="text-end mb-3">
+    <button class="btn btn-success me-2" (click)="onAjouterProjet()">Ajouter un projet</button>
+  </div>

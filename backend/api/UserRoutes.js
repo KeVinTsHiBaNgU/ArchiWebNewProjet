@@ -60,6 +60,17 @@ router.post('/create',  async (req, res) => {
   }
 });
 
+router.get('/etudiants', async (req, res) => {
+  try {
+    const etudiants = await User.find({ role: 'student' });
+    res.status(200).json(etudiants);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Erreur lors de la récupération des étudiants' });
+  }
+});
+
+
 
 // Route pour récupérer les utilisateurs étudiants et enseignants
   router.get('/users',  async (req, res) => {
