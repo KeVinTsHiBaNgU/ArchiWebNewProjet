@@ -10,12 +10,5 @@ const userSchema = new mongoose.Schema({
   projetsCrees: [{ type: Schema.Types.ObjectId, ref: 'Projet'}]
 });
 
-function isStudent() {
-  return this.role === 'student';
-}
-
-function isTeacher() {
-  return this.role === 'teacher';
-}
 
 module.exports = mongoose.model('User', userSchema);
