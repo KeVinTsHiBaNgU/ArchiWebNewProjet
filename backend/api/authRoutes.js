@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
 
     const token = userService.generateToken(user._id);
     console.log(token);
-
+   
     console.log('Connexion réussie pour l\'administrateur :', user.email);
 
     res.status(200).json({ token });

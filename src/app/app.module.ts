@@ -1,4 +1,5 @@
 import { AdminDashboardComponent } from './../../components/admin-dashboard/admin-dashboard.component';
+import { EnseignantDashboardComponent } from './../../components/enseignant-dashboard/enseignant-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,7 +38,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     AdminLoginComponent,
     CreateProjetComponent,
     CreateUserComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    EnseignantDashboardComponent
     
   ],
   providers: [],

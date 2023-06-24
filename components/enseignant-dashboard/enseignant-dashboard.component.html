@@ -1,0 +1,21 @@
+<table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let etudiant of etudiants">
+        <td>{{ etudiant.nom }}</td>
+        <td>{{ etudiant.prenom }}</td>
+        <td>{{ etudiant.email }}</td>
+        <td>
+          <!-- Ajoutez ici les actions que vous souhaitez effectuer sur chaque étudiant -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

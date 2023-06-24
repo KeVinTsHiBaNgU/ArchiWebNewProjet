@@ -15,6 +15,11 @@ export class UserService {
     // Assurez-vous d'ajuster l'URL en fonction de votre API
     return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
+
+  getEtudiants(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + '/all');
+  }
+  
   getUser(userId: string): Observable<User[]> {
     // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
     // Assurez-vous d'ajuster l'URL en fonction de votre API
