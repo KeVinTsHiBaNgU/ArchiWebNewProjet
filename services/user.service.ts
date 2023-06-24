@@ -17,7 +17,7 @@ export class UserService {
   }
 
   getEtudiants(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/all');
+    return this.http.get<any[]>(this.apiUrl + '/etudiants');
   }
   
   getUser(userId: string): Observable<User[]> {

@@ -1,21 +1,27 @@
-<table>
-    <thead>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="table-dark">
       <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Actions</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let etudiant of etudiants">
-        <td>{{ etudiant.nom }}</td>
-        <td>{{ etudiant.prenom }}</td>
+        <td>{{ etudiant.name }}</td>
         <td>{{ etudiant.email }}</td>
         <td>
-          <!-- Ajoutez ici les actions que vous souhaitez effectuer sur chaque étudiant -->
+          <button class="btn btn-primary me-2">Affecter un projet</button>
+          <!-- <button class="btn btn-danger">Supprimer</button> -->
         </td>
       </tr>
     </tbody>
   </table>
-  
+</div>
+
+<div class="text-end mb-3">
+  <button class="btn btn-success me-2" (click)="onAjouterProjet()">Ajouter un projet</button>
+  <button class="btn btn-warning" (click)="onAjouterCompetence()">Ajouter une compétence</button>
+</div>
+

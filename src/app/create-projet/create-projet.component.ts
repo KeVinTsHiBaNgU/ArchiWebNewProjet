@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjetService } from '../../../services/projet.service';
 import { CompetenceService } from '../../../services/competence.service';
+// import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +16,9 @@ export class CreateProjetComponent implements OnInit {
   projetForm: FormGroup= new FormGroup({});
   competences: any[] = []; // Remplacer 'any' par le type approprié pour les compétences
    id: any;
-  constructor(private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute) { }
+  projets!: any[];
+
+  constructor( private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

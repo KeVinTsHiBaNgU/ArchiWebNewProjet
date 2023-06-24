@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service'; 
+// import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -10,7 +13,7 @@ import { UserService } from '../../services/user.service';
 export class EnseignantDashboardComponent {
   etudiants!: any[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.getEtudiants(); // Appelez la méthode pour récupérer les étudiants lors de l'initialisation du composant
@@ -21,4 +24,13 @@ export class EnseignantDashboardComponent {
       this.etudiants = data; // Stockez les étudiants récupérés dans la propriété
     });
   }
+
+  onAjouterProjet() {
+    this.router.navigate(['/projet/new']);
+  }
+
+  onAjouterCompetence() {
+    this.router.navigate(['/competence/new']);
+  }
+
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: "admin/dashboard", component: AdminDashboardComponent },
   { path: "enseignant/dashboard", component: EnseignantDashboardComponent },
   { path: "competence/new", component:  CreateCompetenceComponent },
-  { path: "projet/new/:id", component:  CreateProjetComponent },
+  { path: "projet/new", component:  CreateProjetComponent },
   { path: "user/new", component:  CreateUserComponent }
  
 ];
