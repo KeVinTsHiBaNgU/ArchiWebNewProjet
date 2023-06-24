@@ -6,7 +6,7 @@ const secretKey = 'd252f4f6566116df4ab111de1bbdcd81';
 
 // Méthode de connexion de l'utilisateur
 async function login(email, password) {
-  const user = await User.findOne({ email, role: 'admin' });
+  const user = await User.findOne({ email });
 
   if (!user) {
     return null;
@@ -21,12 +21,12 @@ async function login(email, password) {
   return user;
 }
 
-// Méthode pour récupérer l'administrateur par son ID
+// Méthode pour récupérer l'utilisateur par son ID
 async function getAdmin(adminId) {
   try {
     const admin = await User.findById(adminId);
 
-    if (!admin || admin.role !== 'admin') {
+    if (!admin ) {
       return null;
     }
 
