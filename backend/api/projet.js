@@ -24,7 +24,7 @@ router.post('/new', async (req, res) => {
 router.post('/inscription', async (req, res) => {
   try {
     const etudiant= await Promise.resolve(req.user);
-    const { projetId} = req.body;
+    const  projetId = req.projetId;
 
     // Vérifier si le projet existe
     const projet = await Projet.findById(projetId);
@@ -41,10 +41,10 @@ router.post('/inscription', async (req, res) => {
     // Ajouter l'étudiant à la liste des étudiants inscrits du projet
     projet.etudiantsInscrits.push(etudiant._Id);
     await projet.save();
-
+    const user = await User.findById(etudiant._id);
     // Ajouter le projet à la liste des projets inscrits de l'étudiant
-    etudiant.projetsInscrits.push(projetId);
-    await etudiant.save();
+    user.projetsInscrits.push(projetId);
+    await user.save();
 
     res.status(200).json({ message: 'Étudiant inscrit au projet avec succès' });
   } catch (error) {

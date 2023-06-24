@@ -57,12 +57,15 @@ export class StudentDashboardComponent implements OnInit {
         // Succès de l'inscription au projet
         console.log('Inscription réussie');
         // Effectuer les actions supplémentaires nécessaires, par exemple actualiser la liste des projets, etc.
+        location.reload();
+
       },
       (error) => {
         // Erreur lors de l'inscription au projet
         console.error('Erreur lors de l\'inscription au projet', error);
         // Gérer l'erreur et afficher un message approprié à l'utilisateur
       }
+
     );
   }
 }

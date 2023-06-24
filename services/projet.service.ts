@@ -49,8 +49,7 @@ export class ProjetService {
   inscriptionProjet(projetId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const url = `${this.apiUrl}/projet/inscription`;
-    const body = { projetId};
-    return this.http.post(url, body,{headers});
+    const url = `${this.apiUrl}/inscription`;
+    return this.http.post(url,projetId,{headers});
   }
 }
