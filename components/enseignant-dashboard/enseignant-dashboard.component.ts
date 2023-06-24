@@ -25,12 +25,12 @@ export class EnseignantDashboardComponent {
     });
   }
 
-  onAjouterProjet() {
-    this.router.navigate(['/projet/new']);
+  onVoirProjet() {
+    this.router.navigate(['/view/projet']);
   }
-
-  onAjouterCompetence() {
-    this.router.navigate(['/competence/new']);
+  
+  onVoirCompetence() {
+    this.router.navigate(['/view/competence']);
   }
 
 }

@@ -16,6 +16,8 @@ import { CreateCompetenceComponent } from './create-competence/create-competence
 import { CreateProjetComponent } from './create-projet/create-projet.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { ViewProjetComponent } from './view-projet/view-projet.component';
+import { ViewCompetenceComponent } from './view-competence/view-competence.component';
 
 
 
@@ -42,6 +44,8 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     AdminDashboardComponent,
     EnseignantDashboardComponent,
     StudentDashboardComponent,
+    ViewProjetComponent,
+    ViewCompetenceComponent,
     
   ],
   providers: [],
