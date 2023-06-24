@@ -19,15 +19,77 @@ router.post('/new', async (req, res) => {
   }
 });
 
+
+// POST /projet/inscription
+router.post('/inscription', async (req, res) => {
+  try {
+    const etudiant= await Promise.resolve(req.user);
+    const  projetId = req.projetId;
+
+    // Vérifier si le projet existe
+    const projet = await Projet.findById(projetId);
+    if (!projet) {
+      return res.status(404).json({ message: 'Projet non trouvé' });
+    }
+
+    
+    // Vérifier si l'étudiant est déjà inscrit au projet
+    if (projet.etudiantsInscrits.includes(etudiant._Id)) {
+      return res.status(400).json({ message: 'Étudiant déjà inscrit au projet' });
+    }
+
+    // Ajouter l'étudiant à la liste des étudiants inscrits du projet
+    projet.etudiantsInscrits.push(etudiant._Id);
+    await projet.save();
+    const user = await User.findById(etudiant._id);
+    // Ajouter le projet à la liste des projets inscrits de l'étudiant
+    user.projetsInscrits.push(projetId);
+    await user.save();
+
+    res.status(200).json({ message: 'Étudiant inscrit au projet avec succès' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de l\'inscription à un projet' });
+  }
+});
   
 
 
 // Route pour récupérer tous les projets
+router.get('/other', async (req, res) => {
+  try {
+    const etudiant = await Promise.resolve(req.user);
+  Projet.find({ etudiantsInscrits: { $nin: [etudiant._id] } })
+    .populate('enseignant','name') // Récupère les informations de l'enseignant associé
+    .then(projets => {
+      if (!projets) {
+        return res.status(404).json({ message: 'Projet non trouvé' });
+      }
+       // Les informations de l'enseignant seront disponibles ici
+    projets.forEach(projet => {
+      const enseignant = projet.enseignant; // Accès à la propriété enseignant
+      console.log(enseignant.name)});
+      res.json(projets);
+    })
+    .catch(err => res.status(500).json({ error: err.message })); 
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Une erreur s\'est produite lors de la sauvegarde du projet' });
+    }
+});
+// Route pour récupérer tous les projets
 router.get('/', (req, res) => {
   Projet.find()
-    .populate('enseignant', 'nom prenom') // Récupère les informations de l'enseignant associé
-    .populate('etudiantsInscrits', 'nom prenom') // Récupère les informations des étudiants inscrits
-    .then(projets => res.json(projets))
+    .populate('enseignant') // Récupère les informations de l'enseignant associé
+    .populate('etudiantsInscrits')
+    .populate('competences') // Récupère les informations des étudiants inscrits
+    .then(projets => {
+      if (!projets) {
+        return res.status(404).json({ message: 'Projet non trouvé' });
+      }
+     
+      res.json(projets);
+    })
     .catch(err => res.status(500).json({ error: err.message }));
 });
 

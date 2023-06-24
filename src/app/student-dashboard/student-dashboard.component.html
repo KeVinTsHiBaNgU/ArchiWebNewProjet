@@ -11,8 +11,24 @@
     <li *ngFor="let project of projetsInscrits">{{ project.nom }}</li>
   </ul>
 
-  <h3>Tous les projets :</h3>
-  <ul>
-    <li *ngFor="let project of allProjects">{{ project.nom }}</li>
-  </ul>
+  <h3>Les projets non inscrits</h3>
+  <table id="userTable" class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Esneigant</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projet of autre_projets ">
+        <td>{{ projet.nom }}</td>
+        <td>{{ projet.enseignant.name }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="sInscrire(projet._id)" >s'inscrire</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
