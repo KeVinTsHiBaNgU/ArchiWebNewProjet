@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Enseignant = require("../models/User");
+const authMiddleware = require('../middlewares/authMiddleware');
 // Middleware d'authentification
 router.use(authMiddleware);
 // Récupérer tous les enseignants

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Resultat = require('../models/resultat');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Route pour récupérer un résultat par l'ID de l'étudiant et de la compétence
 // Middleware d'authentification

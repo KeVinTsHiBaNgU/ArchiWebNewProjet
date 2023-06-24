@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Etudiant = require('../models/User');
+const authMiddleware = require('../middlewares/authMiddleware');
 // Middleware d'authentification
- router.use(authMiddleware);
+router.use(authMiddleware);
 // Route pour récupérer tous les étudiants
 router.get('/all/', async (req, res) => {
   try {

@@ -1,4 +1,3 @@
-
 const User = require('../backend/models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -8,6 +7,18 @@ const secretKey = 'd252f4f6566116df4ab111de1bbdcd81';
 // Méthode de connexion de l'utilisateur
 async function login(email, password) {
   const user = await User.findOne({ email }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees");
+  if (!user.competencesAcquises) {
+    user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
+  }
+  
+  if (!user.projetsInscrits) {
+    user.projetsInscrits = []; // Initialise la propriété projetsInscrits avec un tableau vide s'il est null
+  }
+  
+  if (!user.projetsCrees) {
+    user.projetsCrees = []; // Initialise la propriété projetsCrees avec un tableau vide s'il est null
+  }
+  console.log(user.role);
 
   if (!user) {
     return null;
@@ -22,12 +33,12 @@ async function login(email, password) {
   return user;
 }
 
-// Méthode pour récupérer l' par son ID
+// Méthode pour récupérer l'administrateur par son ID
 async function getAdmin(adminId) {
   try {
     const admin = await User.findById(adminId);
 
-    if (!admin ) {
+    if (!admin) {
       return null;
     }
 
@@ -45,10 +56,22 @@ function generateToken(userId) {
   return token;
 }
 
-
+// Fonction pour rediriger l'utilisateur en fonction de son rôle
+function redirectUserByRole(role) {
+  if (role === 'admin') {
+    return '/dashboard'; // Redirection vers la page du tableau de bord de l'administrateur
+  } else if (role === 'teacher') {
+    return '/teacher/dashboard'; // Redirection vers la page du tableau de bord de l'enseignant
+  } else if (role === 'student') {
+    return '/student/dashboard'; // Redirection vers la page du tableau de bord de l'étudiant
+  } else {
+    return '/'; // Redirection vers une page par défaut si le rôle n'est pas reconnu
+  }
+}
 
 module.exports = {
   login,
   getAdmin,
   generateToken,
+  redirectUserByRole
 };

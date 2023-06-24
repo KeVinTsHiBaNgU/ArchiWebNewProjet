@@ -38,12 +38,17 @@ router.post('/create',  async (req, res) => {
     
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+    const competenceAcquises= [];
+    const projetsInscrits= [];
+    const projetsCrees= [];
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
       role,
+      projetsInscrits,
+      competenceAcquises,
+      projetsCrees
     });
 
     await newUser.save();
@@ -66,7 +71,18 @@ router.post('/create',  async (req, res) => {
       //}
       
       // Récupérer les utilisateurs ayant le rôle "étudiant" ou "enseignant"
-      const users = await User.find({ role: { $in: ['student', 'teacher'] } }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees");
+      const users = await User.find({ role: { $in: ['student', 'teacher'] } }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
+      if (!user.competencesAcquises) {
+        user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
+      }
+      
+      if (!user.projetsInscrits) {
+        user.projetsInscrits = []; // Initialise la propriété projetsInscrits avec un tableau vide s'il est null
+      }
+      
+      if (!user.projetsCrees) {
+        user.projetsCrees = []; // Initialise la propriété projetsCrees avec un tableau vide s'il est null
+      };
       
       res.status(200).json(users);
     } catch (error) {

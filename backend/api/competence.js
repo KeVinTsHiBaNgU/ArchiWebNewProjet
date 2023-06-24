@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Competence = require("../models/Competence");
+const authMiddleware = require('../middlewares/authMiddleware');
 // Middleware d'authentification
 router.use(authMiddleware);
 // Route pour créer une nouvelle compétence

@@ -1,3 +1,4 @@
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateProjetComponent } from './create-projet/create-projet.component';
 import { NgModule } from '@angular/core';
@@ -6,12 +7,14 @@ import { AdminLoginComponent } from '../../components/admin-login/admin-login.co
 import { AdminDashboardComponent } from '../../components/admin-dashboard/admin-dashboard.component';
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
 
+
 const routes: Routes = [
   { path: "login", component: AdminLoginComponent },
   { path: "dashboard", component: AdminDashboardComponent },
   { path: "competence/new", component:  CreateCompetenceComponent },
-  { path: "projet/new/:id", component:  CreateProjetComponent },
-  { path: "user/new", component:  CreateUserComponent }
+  { path: "projet/new", component:  CreateProjetComponent },
+  { path: "user/new", component:  CreateUserComponent },
+  { path: "student/dashboard", component:  StudentDashboardComponent }
  
 ];
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,15 +13,21 @@ export class CompetenceService {
   // ...
 
   getCompetenceById(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<any>(url);
+    return this.http.get<any>(url,{headers});
   }
   
   getAllCompetences(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/`);
+    const token = localStorage.getItem('token');
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.apiUrl}/`,{headers});
   }
 
   createCompetence(competence: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/new`, competence);
+    const token = localStorage.getItem('token');
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.apiUrl}/new`, competence, {headers});
   }
 }
