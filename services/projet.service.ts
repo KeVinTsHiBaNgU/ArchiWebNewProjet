@@ -22,6 +22,12 @@ export class ProjetService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any[]>(`${this.apiUrl}`,{headers});
   }
+  
+  getOtherProjets(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.apiUrl}/other`,{headers});
+  }
 
   getProjetById(projetId: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -39,5 +45,12 @@ export class ProjetService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<any>(`${this.apiUrl}/${projetId}`,{headers});
+  }
+  inscriptionProjet(projetId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.apiUrl}/projet/inscription`;
+    const body = { projetId};
+    return this.http.post(url, body,{headers});
   }
 }

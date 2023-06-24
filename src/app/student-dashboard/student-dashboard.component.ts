@@ -15,12 +15,13 @@ export class StudentDashboardComponent implements OnInit {
   user!: User;
   allProjects!: any[];
   competencesacquises: any[]=[];
+  autre_projets!: any[];
   projetsInscrits!: any[]
 
   constructor(
     private userService: UserService,
     private projetService: ProjetService,
-    private skillService: CompetenceService
+    private competenceService: CompetenceService
   ) { }
 
   ngOnInit() {
@@ -32,19 +33,35 @@ export class StudentDashboardComponent implements OnInit {
         this.competencesacquises=this.user.CompetencesAcquises;
         if(this.user.projetsInscrits !== null && this.user.projetsInscrits !== undefined)
         this.projetsInscrits=this.user.projetsInscrits;
-        // Récupérer tous les projets (y compris ceux dans lesquels l'utilisateur est inscrit)
-        this.projetService.getProjets().subscribe(
-          (projects: any[]) => {
-            this.allProjects = projects;
-          },
-          (error) => {
-            console.error('Erreur lors de la récupération de tous les projets', error);
-          }
-        );
+        
+        
        
       },
       (error) => {
         console.error('Erreur lors de la récupération de l\'utilisateur connecté', error);
+      }
+    );
+    
+     // Charger les compétences depuis le service compétence
+     this.projetService.getOtherProjets().subscribe((data: any[]) => {
+      this.autre_projets = data;
+    });
+
+  }
+  sInscrire(projetId: string): void {
+    // Récupérer l'ID de l'étudiant actuel
+    const etudiantId = 'ID de l\'étudiant'; // Remplacez par l'ID de l'étudiant actuel
+
+    this.projetService.inscriptionProjet(projetId).subscribe(
+      () => {
+        // Succès de l'inscription au projet
+        console.log('Inscription réussie');
+        // Effectuer les actions supplémentaires nécessaires, par exemple actualiser la liste des projets, etc.
+      },
+      (error) => {
+        // Erreur lors de l'inscription au projet
+        console.error('Erreur lors de l\'inscription au projet', error);
+        // Gérer l'erreur et afficher un message approprié à l'utilisateur
       }
     );
   }
