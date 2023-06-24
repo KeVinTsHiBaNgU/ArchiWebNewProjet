@@ -5,10 +5,9 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['admin', 'teacher', 'student'], required: true },
-  id_user: { type: String, unique: true },
-  projetsInscrits: [{ type: Schema.Types.ObjectId, ref: 'Projet', validate: { validator: isStudent, message: 'Only available for students' }, default: [] }],
-  CompetencesAcquises: [{ type: Schema.Types.ObjectId, ref: 'Competence', validate: { validator: isStudent, message: 'Only available for students' }, default: [] }],
-  projetsCrees: [{ type: Schema.Types.ObjectId, ref: 'Projet', validate: { validator: isTeacher, message: 'Only available for teachers' }, default: [] }]
+  projetsInscrits: [{ type: Schema.Types.ObjectId, ref: 'Projet'}],
+  CompetencesAcquises: [{ type: Schema.Types.ObjectId, ref: 'Competence'}],
+  projetsCrees: [{ type: Schema.Types.ObjectId, ref: 'Projet'}]
 });
 
 function isStudent() {
