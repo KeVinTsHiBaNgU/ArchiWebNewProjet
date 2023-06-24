@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Projet = require('../models/projet');
-
+// Middleware d'authentification
+router.use(authMiddleware);
 // Route pour créer un projet
 router.post('/new', (req, res) => {
   const { nom, description, enseignant,competences } = req.body;

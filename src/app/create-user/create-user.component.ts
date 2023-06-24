@@ -1,8 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from '../../../backend/models/User';
 import { UserService} from '../../../services/user.service';
 
 

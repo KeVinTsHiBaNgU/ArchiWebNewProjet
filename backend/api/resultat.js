@@ -3,6 +3,8 @@ const router = express.Router();
 const Resultat = require('../models/resultat');
 
 // Route pour récupérer un résultat par l'ID de l'étudiant et de la compétence
+// Middleware d'authentification
+router.use(authMiddleware);
 router.get('/:etudiantId/:competenceId', async (req, res) => {
   try {
     const resultat = await Resultat.findOne({

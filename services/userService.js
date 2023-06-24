@@ -1,3 +1,4 @@
+
 const User = require('../backend/models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -6,7 +7,7 @@ const secretKey = 'd252f4f6566116df4ab111de1bbdcd81';
 
 // Méthode de connexion de l'utilisateur
 async function login(email, password) {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees");
 
   if (!user) {
     return null;
@@ -21,7 +22,7 @@ async function login(email, password) {
   return user;
 }
 
-// Méthode pour récupérer l'utilisateur par son ID
+// Méthode pour récupérer l' par son ID
 async function getAdmin(adminId) {
   try {
     const admin = await User.findById(adminId);

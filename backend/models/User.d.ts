@@ -5,6 +5,8 @@ export interface User {
     email: string;
     password: string;
     role: string;
-    // Autres propriétés de l'utilisateur
+    projetsInscrits?: string[];
+  CompetencesAcquises?: string[];
+  projetsCrees?: string[];
   }
   

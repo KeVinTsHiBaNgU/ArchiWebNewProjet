@@ -20,6 +20,10 @@ export class UserService {
     // Assurez-vous d'ajuster l'URL en fonction de votre API
     return this.http.get<User[]>(`${this.apiUrl}/${userId}`);
   }
+  
+  //getCurrentUser(): Observable<any> {
+   // return this.http.get<any>(this.currentUserUrl);
+  //}
 
   createUser(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, userData);

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Etudiant = require('../models/User');
-
+// Middleware d'authentification
+ router.use(authMiddleware);
 // Route pour récupérer tous les étudiants
 router.get('/all/', async (req, res) => {
   try {
-    const etudiants = await Etudiant.find();
+    const etudiants = await Etudiant.find().populate("projetsInscrits").populate("CompetencesAcquises");
     res.json(etudiants);
   } catch (err) {
     res.status(500).json({ message: err.message });
