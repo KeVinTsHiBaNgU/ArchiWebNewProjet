@@ -44,14 +44,18 @@ export class AuthService {
       const response = await axios.post(`${this.apiURL}auth/login`, { email, password });
   
       // Récupérer le token d'authentification de la réponse
-      const token = response.data.token;
-  
+      let reponse={
+        "token":response.data.token,
+        "url":response.data.redirectUrl
+      }
+      
+      
       // Sauvegarder le token dans le stockage local ou dans un service de gestion de l'état
       // par exemple, utilisez localStorage ou un autre service de gestion de l'état comme NgRx
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', reponse.token);
   
       // Retourner le token
-      return token;
+      return reponse;
     } catch (error) {
       console.error(error);
       throw new Error('Erreur lors de la connexion');

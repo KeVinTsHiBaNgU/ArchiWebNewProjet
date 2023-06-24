@@ -1,0 +1,18 @@
+<h2>Bienvenue sur le tableau de bord</h2>
+
+<div >
+    <h3>Compétences acquises :</h3>
+  <ul>
+    <li *ngFor="let competence of competencesacquises">{{ competence.nom }}</li>
+  </ul>
+
+  <h3>Projets auxquels vous êtes inscrit :</h3>
+  <ul>
+    <li *ngFor="let project of projetsInscrits">{{ project.nom }}</li>
+  </ul>
+
+  <h3>Tous les projets :</h3>
+  <ul>
+    <li *ngFor="let project of allProjects">{{ project.nom }}</li>
+  </ul>
+</div>

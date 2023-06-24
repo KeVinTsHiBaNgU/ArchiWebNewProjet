@@ -14,16 +14,18 @@ router.post('/login', async (req, res) => {
     const user = await userService.login(email, password);
 
     if (!user) {
-      console.log('Administrateur introuvable');
-      return res.status(404).json({ message: 'Administrateur introuvable' });
+      console.log('Utilisateur introuvable');
+      return res.status(404).json({ message: 'Utilisateur introuvable' });
     }
 
     const token = userService.generateToken(user._id);
+    const redirectUrl = userService.redirectUserByRole(user.role);
     console.log(token);
-   
-    console.log('Connexion réussie pour l\'administrateur :', user.email);
+    console.log(user.role);
 
-    res.status(200).json({ token });
+    console.log('Connexion réussie  :', user.email);
+
+    res.status(200).json({ token , redirectUrl});
   } catch (error) {
     console.log('Erreur de connexion :', error);
     res.status(500).json({ message: 'Erreur de connexion' });

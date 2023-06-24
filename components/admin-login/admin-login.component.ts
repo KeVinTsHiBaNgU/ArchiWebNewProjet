@@ -62,6 +62,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { UserService } from 'services/user.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -73,7 +74,8 @@ export class AdminLoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+   
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -95,12 +97,12 @@ export class AdminLoginComponent {
       Swal.fire({
         icon: 'success',
         title: 'Connexion réussie',
-        text: `Vous êtes maintenant connecté en tant qu'administrateur`,
+        text: `Vous êtes maintenant connecté en `,
         showConfirmButton: false,
         timer: 2000
       }).then(() => {
-        // Redirection ou autre action après 2 secondes
-        this.router.navigate(['/admin-dashboard']);
+       
+        this.router.navigate([response.url]);
       });
     } catch (error) {
       // Gérer l'erreur de connexion
@@ -113,5 +115,5 @@ export class AdminLoginComponent {
       });
     }
   }
-  
+
 }

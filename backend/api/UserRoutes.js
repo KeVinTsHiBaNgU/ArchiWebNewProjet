@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 
 
 const router = express.Router();
+// Middleware d'authentification
+//router.use(authMiddleware);
 
 // Fonction pour générer un id_user unique
 function generateUniqueUserId() {
@@ -16,6 +18,17 @@ function generateUniqueUserId() {
   }
   return idUser;
 }
+// Route pour obtenir les informations de l'utilisateur connecté
+router.get('/current', async (req, res) => {
+  try {
+    // Utilisez les informations stockées dans la requête par le middleware d'authentification
+    const currentUser = req.user;
+    res.status(200).json(currentUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la récupération des informations de l\'utilisateur' });
+  }
+});
 
 // Route pour la création d'un utilisateur par l'administrateur
 router.post('/create',  async (req, res) => {
@@ -25,18 +38,24 @@ router.post('/create',  async (req, res) => {
     
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+    const competenceAcquises= [];
+    const projetsInscrits= [];
+    const projetsCrees= [];
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
       role,
+      projetsInscrits,
+      competenceAcquises,
+      projetsCrees
     });
 
     await newUser.save();
 
     res.status(201).json({ message: 'Utilisateur créé avec succès' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Erreur lors de la création de l\'utilisateur' });
   }
 });
@@ -56,14 +75,25 @@ router.get('/etudiants', async (req, res) => {
 // Route pour récupérer les utilisateurs étudiants et enseignants
   router.get('/users',  async (req, res) => {
     try {
-      // Vérifier le rôle de l'utilisateur authentifié (administrateur)
+      
       //console.log(req.user.role);
       //if (req.user.role !== 'admin') {
-       // return res.status(403).json({ message: 'Accès non autorisé' });
+        //return res.status(403).json({ message: 'Accès non autorisé' });
       //}
       
       // Récupérer les utilisateurs ayant le rôle "étudiant" ou "enseignant"
-      const users = await User.find({ role: { $in: ['student', 'teacher'] } });
+      const users = await User.find({ role: { $in: ['student', 'teacher'] } }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
+      if (!user.competencesAcquises) {
+        user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
+      }
+      
+      if (!user.projetsInscrits) {
+        user.projetsInscrits = []; // Initialise la propriété projetsInscrits avec un tableau vide s'il est null
+      }
+      
+      if (!user.projetsCrees) {
+        user.projetsCrees = []; // Initialise la propriété projetsCrees avec un tableau vide s'il est null
+      };
       
       res.status(200).json(users);
     } catch (error) {

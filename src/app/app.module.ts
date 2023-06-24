@@ -15,6 +15,7 @@ import { AdminLoginComponent } from '../../components/admin-login/admin-login.co
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
 import { CreateProjetComponent } from './create-projet/create-projet.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 
 
 
@@ -39,7 +40,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     CreateProjetComponent,
     CreateUserComponent,
     AdminDashboardComponent,
-    EnseignantDashboardComponent
+    EnseignantDashboardComponent,
+    StudentDashboardComponent,
     
   ],
   providers: [],

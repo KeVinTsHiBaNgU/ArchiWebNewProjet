@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const Projet = require('../models/projet');
-
+const authMiddleware = require('../middlewares/authMiddleware');
+// Middleware d'authentification
+router.use(authMiddleware);
 // Route pour créer un projet
-router.post('/new', (req, res) => {
-  const { nom, description, enseignant,competences } = req.body;
-  const nouveauProjet = new Projet({ nom, description, enseignant, competences });
+router.post('/new', async (req, res) => {
+  try {
+    const enseignant = await Promise.resolve(req.user);
+    const { nom, description, competences } = req.body;
+    const nouveauProjet = new Projet({ nom, description, enseignant, competences });
 
-  nouveauProjet.save()
-    .then(projet => res.status(201).json(projet))
-    .catch(err => res.status(500).json({ error: err.message }));
+    await nouveauProjet.save();
+    return res.status(200).json(nouveauProjet);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la sauvegarde du projet' });
+  }
 });
+
+  
+
 
 // Route pour récupérer tous les projets
 router.get('/', (req, res) => {
