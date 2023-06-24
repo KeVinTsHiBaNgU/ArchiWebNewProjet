@@ -21,6 +21,28 @@ router.post('/new', async (req, res) => {
       res.status(500).json({ error: 'Erreur lors de la création de la compétence' });
     }
   });
+
+  // Supprimer une compétence
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const competenceId = req.params.id;
+    const competence = await Competence.findById(competenceId);
+
+    if (!competence) {
+      return res.status(404).json({ error: 'Compétence introuvable' });
+    }
+
+    await competence.remove();
+
+    res.json({ message: 'Compétence supprimée avec succès' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la suppression de la compétence' });
+  }
+});
+
+module.exports = router;
+
   router.get('/:id', async (req, res) => {
     try {
       const competence = await Competence.findById(req.params.id);

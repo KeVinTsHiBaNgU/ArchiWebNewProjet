@@ -13,7 +13,7 @@
     <tr *ngFor="let projet of projets">
       <td>{{ projet.nom }}</td>
       <td>{{ projet.description }}</td>
-      <td>{{ projet.enseignant.nom }} {{ projet.enseignant.prenom }}</td>
+      <td>{{ projet.enseignant.name }} {{ projet.enseignant.id }}</td>
       <td>
         <button class="btn btn-primary">Editer</button>
         <button class="btn btn-danger">Supprimer</button>

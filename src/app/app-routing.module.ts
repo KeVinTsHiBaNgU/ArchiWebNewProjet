@@ -12,6 +12,7 @@ import { CreateCompetenceComponent } from './create-competence/create-competence
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: AdminLoginComponent },
   { path: "admin/dashboard", component: AdminDashboardComponent },
   { path: "enseignant/dashboard", component: EnseignantDashboardComponent },

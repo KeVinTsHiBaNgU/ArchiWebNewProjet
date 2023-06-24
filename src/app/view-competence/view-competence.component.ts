@@ -23,6 +23,16 @@ export class ViewCompetenceComponent implements OnInit {
     });
   }
 
+  deleteCompetence(competenceId: string) {
+    this.competenceService.deleteCompetence(competenceId).subscribe(() => {
+      // Suppression réussie, mettez à jour la liste des compétences
+      this.getAllCompetences();
+    }, (error) => {
+      console.error(error);
+      // Gérer l'erreur de suppression de compétence
+    });
+  }
+
   onAjouterCompetence() {
     this.router.navigate(['/competence/new']);
   }
