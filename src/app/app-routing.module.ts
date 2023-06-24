@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: "view/projet", component:  ViewProjetComponent },
   { path: "view/competence", component:  ViewCompetenceComponent },
   { path: "user/new", component:  CreateUserComponent },
-  { path: "student/dashboard", component:  StudentDashboardComponent }
+  { path: "student/dashboard", component:  StudentDashboardComponent },
+  { path: 'projet/edit/:id', component: CreateProjetComponent }
  
 ];
 

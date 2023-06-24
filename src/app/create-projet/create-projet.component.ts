@@ -51,7 +51,35 @@ export class CreateProjetComponent implements OnInit {
     this.projetService.createProjet(projet).subscribe((data) => {
       // Traiter la réponse du serveur ou effectuer une action appropriée
     });
+
+    // this.projetService.updateProjet(projet.id, projet).subscribe(
+    //   (data: any) => {
+    //     // Traiter la réponse du serveur ou effectuer une action appropriée
+    //     // par exemple, afficher un message de succès ou rediriger vers une autre page
+    //   },
+    //   (error: any) => {
+    //     console.error(error);
+    //     // Gérer l'erreur lors de la modification du projet
+    //   }
+    // );
   }    
+
+  // loadProjet(projetId: string) {
+  //   this.projetService.getProjetById(projetId).subscribe(
+  //     (projet: any) => {
+  //       // Remplir les champs du formulaire avec les données du projet
+  //       this.projetForm.patchValue({
+  //         nom: projet.nom,
+  //         description: projet.description,
+  //         competences: projet.competences
+  //       });
+  //     },
+  //     (error: any) => {
+  //       console.error(error);
+  //       // Gérer l'erreur lors du chargement du projet
+  //     }
+  //   );
+  // }
       
-    }
+}
     

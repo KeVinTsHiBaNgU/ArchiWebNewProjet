@@ -36,4 +36,21 @@ export class ViewProjetComponent {
         }
         );
       }
+
+
+      deleteProjet(projetId: string) {
+        this.projetService.deleteProjet(projetId).subscribe(() => {
+          // Suppression réussie, mettez à jour la liste des compétences
+          this.getProjets();
+        }, (error) => {
+          console.error(error);
+          // Gérer l'erreur de suppression de compétence
+        });
+      }
+
+      editProjet(projetId: string) {
+        // Redirigez vers la page de modification du projet avec l'identifiant du projet en tant que paramètre
+        this.router.navigate(['/projet/edit', projetId]);
+      } 
+      
 }
