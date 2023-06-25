@@ -11,7 +11,7 @@ import { EnseignantDashboardComponent } from './enseignant-dashboard/enseignant-
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { UserProfileComponent  } from './user-profile/user-profile.component';
-
+import { ResultatEditComponent } from './resultat-edit/resultat-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: "user/new", component:  CreateUserComponent },
   { path: "student/dashboard", component:  StudentDashboardComponent },
   { path: 'projet/edit/:id', component: EditProjetComponent },
-  { path: 'user/profile', component: UserProfileComponent  }
+  { path: 'user/profile', component: UserProfileComponent  },
+  { path: 'result/edit/:id', component: ResultatEditComponent }
  
 ];
 

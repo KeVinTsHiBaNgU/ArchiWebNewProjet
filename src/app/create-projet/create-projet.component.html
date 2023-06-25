@@ -1,16 +1,20 @@
 <div class="container">
-  <h2>Créer un nouveau projet</h2>
-  <form [formGroup]="projetForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="nom" class="form-label">Nom :</label>
-      <input type="text" id="nom" class="form-control" formControlName="nom">
+  <h1>Modifier le projet</h1>
+  <form [formGroup]="projetForm" (ngSubmit)="updateProjet()">
+    <div class="form-group">
+      <label for="nom">Nom du projet</label>
+      <input type="text" id="nom" class="form-control" formControlName="nom" required>
     </div>
-    <div class="mb-3">
-      <label for="description" class="form-label">Description :</label>
-      <textarea id="description" class="form-control" formControlName="description"></textarea>
+    <div class="form-group">
+      <label for="description">Description du projet</label>
+      <textarea id="description" class="form-control" formControlName="description" required></textarea>
     </div>
-  
-    
-    <button type="submit" class="btn btn-primary">Créer</button>
+    <div class="form-group">
+      <label for="competences">Compétences requises</label>
+      <select id="competences" class="form-control" formControlName="competences" multiple>
+        <option *ngFor="let competence of competences" [value]="competence._id">{{ competence.nom }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
   </form>
 </div>

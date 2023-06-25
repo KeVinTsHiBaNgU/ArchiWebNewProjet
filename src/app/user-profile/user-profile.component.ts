@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { User } from 'backend/models/User';
 
 @Component({
   selector: 'app-user-profile',
@@ -27,8 +28,7 @@ export class UserProfileComponent implements OnInit {
   
 
     this.userService.getCurrentUser().subscribe(
-      (response) => {
-        const user = response?.data; // Vérifiez que la réponse contient un objet 'data' contenant les informations utilisateur
+      (user: User) => {
         if (user) {
           this.profileForm.patchValue({
             name: user.name,

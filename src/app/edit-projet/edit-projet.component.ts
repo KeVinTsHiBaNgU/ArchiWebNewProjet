@@ -54,6 +54,7 @@ export class EditProjetComponent implements OnInit {
     }
 
     const formData = this.projetForm.value;
+    console.log(formData.competences);
     const projet = {
       nom: formData.nom,
       description: formData.description,

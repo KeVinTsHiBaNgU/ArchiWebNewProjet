@@ -35,11 +35,7 @@ router.get('/current', async (req, res) => {
     // Utilisez les informations stockées dans la requête par le middleware d'authentification
     const currentUser = req.user;
     console.log(currentUser);
-    res.status(200).json({
-      id: currentUser.id,  // Inclure l'ID de l'utilisateur dans la réponse
-      name: currentUser.name,
-      email: currentUser.email
-    });
+    res.status(200).json(currentUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erreur lors de la récupération des informations de l\'utilisateur' });
