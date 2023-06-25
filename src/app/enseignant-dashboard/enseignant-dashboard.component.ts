@@ -33,4 +33,8 @@ export class EnseignantDashboardComponent {
     this.router.navigate(['/view/competence']);
   }
 
+  onVoirCompte() {
+    this.router.navigate(['/user/profile']);
+  }
+
 }

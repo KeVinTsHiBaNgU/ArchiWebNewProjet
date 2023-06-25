@@ -34,9 +34,18 @@ export class UserService {
   
   getCurrentUser(): Observable<any> {
     const token = localStorage.getItem('token');
-     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-   return this.http.get<any>(`${this.apiUrl}/current`, { headers });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/current`, { headers });
   }
+
+  updateUserProfile(name: string, email: string, password: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { name, email, password };
+  
+    return this.http.put<any>(`${this.apiUrl}/profile`, body, { headers });
+  }
+  
 
   createUser(userData: any): Observable<any> {
     const token = localStorage.getItem('token');

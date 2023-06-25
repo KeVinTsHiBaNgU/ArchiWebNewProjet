@@ -78,9 +78,9 @@ router.get('/other', async (req, res) => {
 // Route pour récupérer tous les projets
 router.get('/', (req, res) => {
   Projet.find()
-    .populate('enseignant') // Récupère les informations de l'enseignant associé
+    .populate('enseignant') 
     .populate('etudiantsInscrits')
-    .populate('competences') // Récupère les informations des étudiants inscrits
+    .populate('competences') 
     .then(projets => {
       if (!projets) {
         return res.status(404).json({ message: 'Projet non trouvé' });
