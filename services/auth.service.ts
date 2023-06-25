@@ -9,19 +9,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = 'http://localhost:3000/api/'; // Mettez à jour l'URL avec votre URL de l'API
+  private apiURL = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  // login(email: string, password: string) {
-  //   const body = { email, password };
-  
-  //   return this.http.post(`${this.apiURL}auth/login`, body, {
-  //     headers: new HttpHeaders({
-  //       'Authorization': 'Bearer ' + localStorage.getItem('token')
-  //     })
-  //   });
-  // }
   
   async login(email: string, password: string) {
     try {
@@ -35,8 +25,6 @@ export class AuthService {
       }
       
       
-      // Sauvegarder le token dans le stockage local ou dans un service de gestion de l'état
-      // par exemple, utilisez localStorage ou un autre service de gestion de l'état comme NgRx
       localStorage.setItem('token', reponse.token);
   
       // Retourner le token
@@ -57,11 +45,9 @@ export class AuthService {
     if (token) {
       // Utiliser le token pour ajouter l'en-tête d'autorisation dans une requête
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      // Faire la requête HTTP avec les en-têtes d'autorisation
-      // ...
+      
     } else {
-      // Gérer le cas où le token n'est pas disponible
-      // ...
+      
     }
   }
 

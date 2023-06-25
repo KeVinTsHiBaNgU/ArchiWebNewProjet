@@ -59,7 +59,7 @@ function generateToken(userId) {
 // Fonction pour rediriger l'utilisateur en fonction de son rôle
 function redirectUserByRole(role) {
   if (role === 'admin') {
-    return '/dashboard'; // Redirection vers la page du tableau de bord de l'administrateur
+    return '/admin/dashboard'; // Redirection vers la page du tableau de bord de l'administrateur
   } else if (role === 'teacher') {
     return '/enseignant/dashboard'; // Redirection vers la page du tableau de bord de l'enseignant
   } else if (role === 'student') {

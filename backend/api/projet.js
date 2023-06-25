@@ -25,9 +25,6 @@ router.post('/new', async (req, res) => {
 });
 
 
-// POST /projet/inscription
-// POST /projet/inscription
-
 
 router.post('/inscription', async (req, res) => {
   try {

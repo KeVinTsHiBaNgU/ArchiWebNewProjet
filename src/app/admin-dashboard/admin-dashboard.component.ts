@@ -1,40 +1,27 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { DataTableDirective } from 'angular-datatables';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service'; 
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: 'admin-dashboard.component.html',
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(DataTableDirective, { static: false })
-  datatableElement!: DataTableDirective;
-  dtTrigger: Subject<any> = new Subject<any>();
-
-  dtOptions: any = {};
+export class AdminDashboardComponent implements OnInit {
 
   userForm!: FormGroup;
   users: any[] = [];
 
-  constructor(private userService: UserService, private modalService: NgbModal, private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
-    this.getUsers();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      processing: true,
-      dom: 'Bfrtip',
-      buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-     
-    };
-  
+    this.userService.getAllUsers().subscribe((data: any[]) => {
+      // Filtrer les utilisateurs pour exclure l'administrateur
+      this.users = data.filter(user => user.role !== 'admin');
+    });
+  }
 
-}
   onSubmit() {
     if (this.userForm.invalid) {
       return;
@@ -48,18 +35,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     };
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      // @ts-ignore
-      this.datatableElement.dtTrigger.next();
-    });
-  }
-
-
-  ngOnDestroy(): void {
-    this.datatableElement.dtTrigger.unsubscribe();
-  }
-
+  
   getUsers() {
     this.userService.getUsers().subscribe((users) => {
       // Filtrer les utilisateurs par rôle (enseignant et étudiant)
@@ -67,5 +43,8 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy
     });
   }
 
+  logout() {
+    this.authService.logout(); // Appeler la méthode logout() du service AuthService
+  }
 
 }
