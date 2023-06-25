@@ -7,6 +7,8 @@ import { ModalService } from '../../../services/modal.service';
 import { CompetenceService } from '../../../services/competence.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-create-projet',
@@ -19,7 +21,7 @@ export class CreateProjetComponent implements OnInit {
   id: any;
   modalNouveauProjet: any;
 
-  constructor( private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute) { }
+  constructor( private formBuilder: FormBuilder, private projetService: ProjetService ,  private competenceService: CompetenceService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -47,11 +49,26 @@ export class CreateProjetComponent implements OnInit {
       competences: formData.competences,
       enseignant: this.id
     };
-  
-    this.projetService.createProjet(projet).subscribe((data) => {
+
+    this.projetService.createProjet(projet).subscribe((createdProjet: any) => {
+      const projetId = createdProjet._id; // Récupérer l'ID du projet créé
       // Traiter la réponse du serveur ou effectuer une action appropriée
+  
+      // Afficher une alerte avec SweetAlert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Projet créé avec succès!',
+        showConfirmButton: false,
+        timer: 2000 // Durée de l'alerte en millisecondes (2 secondes)
+      });
+  
+      // Rediriger vers "/view/projet" après 2 secondes
+      setTimeout(() => {
+        this.router.navigate(['/view/projet']);
+      }, 2000);
     });
+
   }    
       
-    }
+}
     

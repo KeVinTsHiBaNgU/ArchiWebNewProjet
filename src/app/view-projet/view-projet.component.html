@@ -6,6 +6,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Description</th>
       <th scope="col">Enseignant</th>
+      <th scope="col">Compétences</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -13,10 +14,11 @@
     <tr *ngFor="let projet of projets">
       <td>{{ projet.nom }}</td>
       <td>{{ projet.description }}</td>
-      <td>{{ projet.enseignant.name }} {{ projet.enseignant.id }}</td>
+      <td>{{ projet.enseignant.name }}</td>
+      <td>{{ projet.competences.nom }} </td>
       <td>
-        <button class="btn btn-primary">Editer</button>
-        <button class="btn btn-danger">Supprimer</button>
+        <button class="btn btn-primary me-2" (click)="editProjet(projet._id)">Editer</button>
+        <button class="btn btn-danger" (click)="deleteProjet(projet._id)">Supprimer</button>
       </td>
     </tr>
   </tbody>
