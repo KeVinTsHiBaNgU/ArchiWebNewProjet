@@ -82,7 +82,7 @@ router.get('/etudiants', async (req, res) => {
       //}
       
       // Récupérer les utilisateurs ayant le rôle "étudiant" ou "enseignant"
-      const users = await User.find({ role: { $in: ['student', 'teacher'] } }).populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
+      const users = await User.find().populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
       if (!user.competencesAcquises) {
         user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
       }

@@ -21,10 +21,11 @@ router.post('/new', async (req, res) => {
 
 
 // POST /projet/inscription
+// POST /projet/inscription
 router.post('/inscription', async (req, res) => {
   try {
     const etudiant= await Promise.resolve(req.user);
-    const  projetId = req.projetId;
+    const { projetId} = req.body;
 
     // Vérifier si le projet existe
     const projet = await Projet.findById(projetId);
@@ -32,19 +33,16 @@ router.post('/inscription', async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
-    
-    // Vérifier si l'étudiant est déjà inscrit au projet
-    if (projet.etudiantsInscrits.includes(etudiant._Id)) {
-      return res.status(400).json({ message: 'Étudiant déjà inscrit au projet' });
-    }
 
     // Ajouter l'étudiant à la liste des étudiants inscrits du projet
-    projet.etudiantsInscrits.push(etudiant._Id);
+    projet.etudiantsInscrits.push(etudiant);
+    console.log(etudiant);
     await projet.save();
-    const user = await User.findById(etudiant._id);
+    let etud_modif= await user.findone( { email: etudiant.email});
     // Ajouter le projet à la liste des projets inscrits de l'étudiant
-    user.projetsInscrits.push(projetId);
-    await user.save();
+    etud_modif.projetsInscrits.push(projet);
+    console.log(etud_modift.name);
+    await etud_modif.save();
 
     res.status(200).json({ message: 'Étudiant inscrit au projet avec succès' });
   } catch (error) {
@@ -52,7 +50,7 @@ router.post('/inscription', async (req, res) => {
     res.status(500).json({ message: 'Une erreur s\'est produite lors de l\'inscription à un projet' });
   }
 });
-  
+
 
 
 // Route pour récupérer tous les projets

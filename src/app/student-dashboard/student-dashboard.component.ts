@@ -12,11 +12,12 @@ import  {User}  from 'backend/models/User';
   styleUrls: ['./student-dashboard.component.css']
 })
 export class StudentDashboardComponent implements OnInit {
-  user!: User;
+  user!: any;
   allProjects!: any[];
   competencesacquises: any[]=[];
   autre_projets!: any[];
-  projetsInscrits!: any[]
+  projetsInscrits!: any[];
+  userId?:string
 
   constructor(
     private userService: UserService,
@@ -50,22 +51,20 @@ export class StudentDashboardComponent implements OnInit {
   }
   sInscrire(projetId: string): void {
     // Récupérer l'ID de l'étudiant actuel
-    const etudiantId = 'ID de l\'étudiant'; // Remplacez par l'ID de l'étudiant actuel
+  
 
     this.projetService.inscriptionProjet(projetId).subscribe(
       () => {
         // Succès de l'inscription au projet
         console.log('Inscription réussie');
         // Effectuer les actions supplémentaires nécessaires, par exemple actualiser la liste des projets, etc.
-        location.reload();
-
       },
       (error) => {
         // Erreur lors de l'inscription au projet
         console.error('Erreur lors de l\'inscription au projet', error);
         // Gérer l'erreur et afficher un message approprié à l'utilisateur
       }
-
     );
   }
+
 }

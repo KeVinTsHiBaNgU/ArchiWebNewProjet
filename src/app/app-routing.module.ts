@@ -5,9 +5,9 @@ import { ViewProjetComponent } from './view-projet/view-projet.component';
 import { ViewCompetenceComponent } from './view-competence/view-competence.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminLoginComponent } from '../../components/admin-login/admin-login.component'; // Importer le composant
-import { AdminDashboardComponent } from '../../components/admin-dashboard/admin-dashboard.component';
-import { EnseignantDashboardComponent } from '../../components/enseignant-dashboard/enseignant-dashboard.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component'; // Importer le composant
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { EnseignantDashboardComponent } from './enseignant-dashboard/enseignant-dashboard.component';
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
 
 

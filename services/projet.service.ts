@@ -47,9 +47,10 @@ export class ProjetService {
     return this.http.delete<any>(`${this.apiUrl}/${projetId}`,{headers});
   }
   inscriptionProjet(projetId: string): Observable<any> {
+    const body = { projetId };
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.apiUrl}/inscription`;
-    return this.http.post(url,projetId,{headers});
+    return this.http.post(url,body,{headers});
   }
 }

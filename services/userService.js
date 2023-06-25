@@ -36,7 +36,7 @@ async function login(email, password) {
 // Méthode pour récupérer l'administrateur par son ID
 async function getAdmin(adminId) {
   try {
-    const admin = await User.findById(adminId);
+    const admin = await User.findById(adminId).populate("projetsInscrits").populate("competencesAcquises").populate("projetsCrees");
 
     if (!admin) {
       return null;

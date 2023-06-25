@@ -60,7 +60,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { UserService } from 'services/user.service';
 
