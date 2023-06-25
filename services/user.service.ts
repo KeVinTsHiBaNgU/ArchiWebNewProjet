@@ -11,12 +11,15 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
-    // Assurez-vous d'ajuster l'URL en fonction de votre API
-     // Inclure le token dans l'en-tête de la requête
      const token = localStorage.getItem('token');
      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers });
+  }
+
+  getAllUsers(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.apiUrl}/all/users`);
   }
 
   getEtudiants(): Observable<any[]> {
@@ -24,9 +27,6 @@ export class UserService {
   }
   
   getUser(userId: string): Observable<User[]> {
-    // Effectuez une requête HTTP GET pour récupérer les utilisateurs depuis votre backend
-    // Assurez-vous d'ajuster l'URL en fonction de votre API
-     // Inclure le token dans l'en-tête de la requête
      const token = localStorage.getItem('token');
      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
      return this.http.get<User[]>(`${this.apiUrl}/${userId}`, { headers });

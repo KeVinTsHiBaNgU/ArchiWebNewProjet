@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th>Email</th>
         <th>role</th>
         <th>Actions</th>
       </tr>
@@ -14,6 +15,7 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>
           <button class="btn btn-primary" >Modifier</button>
@@ -24,3 +26,6 @@
   </table>
   <a href="/user/new"><button class="btn btn-primary mb-3" >Ajouter un utilisateur</button></a>
 </div>
+
+<button class="btn btn-danger" (click)="logout()">Déconnexion</button>
+

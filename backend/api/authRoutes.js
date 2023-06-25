@@ -32,16 +32,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// router.get('/admin/users', authMiddleware, async (req, res) => {
-//   try {
-//     const token = req.headers.authorization.split(' ')[1]; // Récupérez le token d'authentification depuis les headers de la requête
-//     userService.getUsersForAdminDashboard(token); // Appelez la méthode du userService avec le token
 
-//     res.status(200).json({ message: 'Opération en cours' });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
-//   }
-// });
 router.get('/admin/dashboard', authMiddleware, async (req, res) => {
   try {
     // const token = req.headers.authorization.split(' ')[1];

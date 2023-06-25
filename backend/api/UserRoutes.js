@@ -10,25 +10,15 @@ const router = express.Router();
 // Middleware d'authentification
 router.use(authMiddleware);
 
-// Fonction pour générer un id_user unique
-function generateUniqueUserId() {
-  let idUser = '23';
-  for (let i = 0; i < 6; i++) {
-    idUser += Math.floor(Math.random() * 10);
+router.get('/all/users', async (req, res) => {
+  try {
+    const users = await User.find().select('name email role'); // Sélectionnez uniquement les champs 'name', 'email' et 'role'
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
   }
-  return idUser;
-}
-// Route pour obtenir les informations de l'utilisateur connecté
-// router.get('/current', async (req, res) => {
-//   try {
-//     // Utilisez les informations stockées dans la requête par le middleware d'authentification
-//     const currentUser = req.user;
-//     res.status(200).json(currentUser);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Erreur lors de la récupération des informations de l\'utilisateur' });
-//   }
-// });
+});
 
 router.get('/current', async (req, res) => {
   try {
@@ -59,7 +49,7 @@ router.put('/profile', async (req, res) => {
     // Mettez à jour les informations de l'utilisateur
     user.name = name;
     user.email = email;
-    
+
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.password = hashedPassword;
@@ -123,13 +113,6 @@ router.get('/etudiants', async (req, res) => {
 // Route pour récupérer les utilisateurs étudiants et enseignants
   router.get('/users',  async (req, res) => {
     try {
-      
-      //console.log(req.user.role);
-      //if (req.user.role !== 'admin') {
-        //return res.status(403).json({ message: 'Accès non autorisé' });
-      //}
-      
-      // Récupérer les utilisateurs ayant le rôle "étudiant" ou "enseignant"
       const users = await User.find().populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
       if (!user.competencesAcquises) {
         user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
@@ -177,29 +160,5 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => res.status(500).json({ error: err.message }));
 });
-
-  
-  // Route pour récupérer les étudiants et les enseignants pour le tableau de bord de l'administrateur
-  // Route pour récupérer les utilisateurs étudiants et enseignants pour le tableau de bord de l'administrateur
-// router.get('/admin/users', authMiddleware, async (req, res) => {
-//   try {
-//     // const token = req.headers.authorization;
-
-//     const token = req.headers.authorization.split(' ')[1];
-//     console.log("tu ne rentres pas");
-//     console.log(token);
-//     const users = await userService.getUsersForAdminDashboard(token);
-
-//     if (!token) {
-//       return res.status(401).json({ message: 'Token d\'authentification manquant' });
-//     }
-
-//     // const users = await userService.getUsersForAdminDashboard(token);  
-
-//     res.status(200).json(users);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
-//   }
-// });
 
 module.exports = router;

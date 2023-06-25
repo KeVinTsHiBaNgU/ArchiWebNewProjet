@@ -1,29 +1,22 @@
-
-
-
-
-
-
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-    <div>
-      <label for="name">Nom:</label>
-      <input type="text" id="name" name="name" [(ngModel)]="name" required>
-    </div>
-    <div>
-        <div >
-            <label class="form-label">Adresse e-mail</label>
-            <input type="email" class="form-control" name="email" [(ngModel)]="email" required>
-          </div>
-      <label for="password">Mot de passe:</label>
-      <input type="password" id="password" name="password" [(ngModel)]="password" required>
-    </div>
-    <div>
-      <label for="role">Rôle:</label>
-      <select id="role" name="role" [(ngModel)]="role" required>
-        <option value="teacher">Enseignant</option>
-        <option value="student">Etudiant</option>
-      </select>
-    </div>
-    <button type="submit" [disabled]="!userForm.valid">Ajouter</button>
-  </form>
-  
+  <div class="mb-3">
+    <label for="name" class="form-label">Nom:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="name" required class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Adresse e-mail:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="email" required class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Mot de passe:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="role" class="form-label">Rôle:</label>
+    <select id="role" name="role" [(ngModel)]="role" required class="form-select">
+      <option value="teacher">Enseignant</option>
+      <option value="student">Etudiant</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Ajouter</button>
+</form>
