@@ -1,11 +1,11 @@
 
-import { CompetenceService } from './../../../services/competence.service';
 import { ResultatService } from './../../../services/resultat.service';
 import { UserService} from '../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from '../../../services/projet.service';
 import  {User}  from 'backend/models/User';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service'; 
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
@@ -25,7 +25,8 @@ export class StudentDashboardComponent implements OnInit {
     private userService: UserService,
     private projetService: ProjetService,
     private resultatService: ResultatService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -83,5 +84,7 @@ export class StudentDashboardComponent implements OnInit {
     // Redirigez vers la page de modification du projet avec l'identifiant du projet en tant que paramètre
     this.router.navigate(['projet/details/', competenceId]);
   } 
-
+  logout() {
+    this.authService.logout(); // Appeler la méthode logout() du service AuthService
+  }
 }
