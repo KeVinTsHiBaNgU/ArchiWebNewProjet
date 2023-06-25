@@ -19,16 +19,64 @@ function generateUniqueUserId() {
   return idUser;
 }
 // Route pour obtenir les informations de l'utilisateur connecté
+// router.get('/current', async (req, res) => {
+//   try {
+//     // Utilisez les informations stockées dans la requête par le middleware d'authentification
+//     const currentUser = req.user;
+//     res.status(200).json(currentUser);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Erreur lors de la récupération des informations de l\'utilisateur' });
+//   }
+// });
+
 router.get('/current', async (req, res) => {
   try {
     // Utilisez les informations stockées dans la requête par le middleware d'authentification
     const currentUser = req.user;
-    res.status(200).json(currentUser);
+    console.log(currentUser);
+    res.status(200).json({
+      id: currentUser.id,  // Inclure l'ID de l'utilisateur dans la réponse
+      name: currentUser.name,
+      email: currentUser.email
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erreur lors de la récupération des informations de l\'utilisateur' });
   }
 });
+
+router.put('/profile', async (req, res) => {
+  try {
+    // Utilisez les informations stockées dans la requête par le middleware d'authentification
+    const userId = req.user.id;
+    const { name, email, password } = req.body;
+
+    // Recherchez l'utilisateur dans la base de données par son identifiant
+    const user = await User.findById(userId);
+
+    // Vérifiez si l'utilisateur existe
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    // Mettez à jour les informations de l'utilisateur
+    user.name = name;
+    user.email = email;
+    user.password = password;
+
+    // Enregistrez les modifications dans la base de données
+    await user.save();
+
+    // Réponse de succès avec les informations mises à jour de l'utilisateur
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la mise à jour des informations de l\'utilisateur' });
+  }
+});
+
+
 
 // Route pour la création d'un utilisateur par l'administrateur
 router.post('/create',  async (req, res) => {

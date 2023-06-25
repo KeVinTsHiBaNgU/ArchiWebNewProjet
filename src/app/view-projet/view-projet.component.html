@@ -15,7 +15,11 @@
       <td>{{ projet.nom }}</td>
       <td>{{ projet.description }}</td>
       <td>{{ projet.enseignant.name }}</td>
-      <td>{{ projet.competences.nom }} </td>
+      <td>
+        <ul>
+          <li *ngFor="let competence of projet.competences">{{ competence.nom }}</li>
+        </ul>
+      </td>
       <td>
         <button class="btn btn-primary me-2" (click)="editProjet(projet._id)">Editer</button>
         <button class="btn btn-danger" (click)="deleteProjet(projet._id)">Supprimer</button>
