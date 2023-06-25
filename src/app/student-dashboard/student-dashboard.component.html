@@ -1,22 +1,51 @@
 <h2>Bienvenue sur le tableau de bord</h2>
 
 <div >
-    <h3>Compétences acquises :</h3>
-  <ul>
-    <li *ngFor="let competence of competencesacquises">{{ competence.nom }}</li>
-  </ul>
+    <h3>Resultats</h3>
+  
+    <table id="userTable" class="table">
+      <thead>
+        <tr>
+          <th> Competence</th>
+          <th>etat</th>
+          <th>Resultat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of resultats ">
+          <td>{{result.competence.nom }}</td>
+          <td>{{result.note }}</td>
+          <td>
+            <button class="btn btn-primary" >Voir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <h3>Projets auxquels vous êtes inscrit :</h3>
-  <ul>
-    <li *ngFor="let project of projetsInscrits">{{ project.nom }}</li>
-  </ul>
+  <table id="userTable" class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projet of projetsInscrits ">
+        <td>{{ projet.nom }}</td>
+        
+        <td>
+          <button class="btn btn-primary" >Voir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <h3>Les projets non inscrits</h3>
   <table id="userTable" class="table">
     <thead>
       <tr>
         <th>Nom</th>
-        <th>Esneigant</th>
+        <th>Eseignant</th>
         <th>Actions</th>
       </tr>
     </thead>

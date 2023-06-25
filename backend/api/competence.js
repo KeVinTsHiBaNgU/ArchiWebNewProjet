@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Competence = require("../models/Competence");
+const Competence = require("../models/competence");
 const authMiddleware = require('../middlewares/authMiddleware');
 // Middleware d'authentification
 router.use(authMiddleware);

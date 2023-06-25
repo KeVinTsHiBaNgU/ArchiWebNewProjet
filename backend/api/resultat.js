@@ -6,12 +6,13 @@ const authMiddleware = require('../middlewares/authMiddleware');
 // Route pour récupérer un résultat par l'ID de l'étudiant et de la compétence
 // Middleware d'authentification
 router.use(authMiddleware);
-router.get('/:etudiantId/:competenceId', async (req, res) => {
+router.get('/:competenceId', async (req, res) => {
   try {
+    const user=req.user;
     const resultat = await Resultat.findOne({
-      etudiant: req.params.etudiantId,
+      etudiant: user._id,
       competence: req.params.competenceId
-    }).exec();
+    }).populate("competence").exec();
 
     if (resultat) {
       res.json(resultat);
@@ -22,17 +23,34 @@ router.get('/:etudiantId/:competenceId', async (req, res) => {
     res.status(500).json({ message: 'Erreur lors de la récupération du résultat' });
   }
 });
+router.get('/', async (req, res) => {
+  try {
+    const user=req.user;
+    const resultats = await Resultat.find({
+      etudiant: user._id
+    }).populate("competence").exec();
+
+    if (resultats) {
+      res.json(resultats);
+    } else {
+      res.status(404).json({ message: 'Résultat non trouvé' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur lors de la récupération du résultat' });
+  }
+});
 
 // Route pour créer un résultat
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
-    const { etudiantId, competenceId, resultat, note } = req.body;
+    const user=req.user;
+    const {  competenceId} = req.body;
 
     const nouveauResultat = new Resultat({
-      etudiant: etudiantId,
+      etudiant: user._id,
       competence: competenceId,
-      resultat: resultat,
-      note: note,
+      resultat: "non acquis",
+      note: 0,
     });
 
     const resultatCree = await nouveauResultat.save();
@@ -44,10 +62,11 @@ router.post('/', async (req, res) => {
 });
 
 // Route pour supprimer un résultat par l'ID de l'étudiant et de la compétence
-router.delete('/:etudiantId/:competenceId', async (req, res) => {
+router.delete('/:competenceId', async (req, res) => {
   try {
+    const user=req.user;
     const resultatSupprime = await Resultat.findOneAndDelete({
-      etudiant: req.params.etudiantId,
+      etudiant: user._id,
       competence: req.params.competenceId
     }).exec();
 

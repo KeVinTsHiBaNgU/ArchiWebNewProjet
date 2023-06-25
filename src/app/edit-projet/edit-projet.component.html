@@ -11,7 +11,7 @@
       </div>
       <div class="form-group">
         <label for="competences">Compétences requises</label>
-        <select id="competences" class="form-control" formControlName="competences" multiple>
+        <select id="competences" class="form-control" formControlName="competences" >
           <option *ngFor="let competence of competences" [value]="competence._id">{{ competence.nom }}</option>
         </select>
       </div>

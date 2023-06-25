@@ -39,7 +39,7 @@ app.use('/api/etudiants', etudiantRoutes);
 app.use('/api/enseignants', enseignantRoutes);
 app.use('/api/projets', projetRoutes);
 app.use('/api/competence', competenceRoutes);
-app.use('/api/resultat', resultatRoutes);
+app.use('/api/resultats', resultatRoutes);
 
 
 

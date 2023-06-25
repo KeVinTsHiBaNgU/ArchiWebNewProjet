@@ -9,12 +9,8 @@
       <label for="description" class="form-label">Description :</label>
       <textarea id="description" class="form-control" formControlName="description"></textarea>
     </div>
-    <div class="mb-3">
-      <label for="competences" class="form-label">Compétences :</label>
-      <select id="competences" class="form-control" formControlName="competences" multiple>
-        <option *ngFor="let competence of competences" [value]="competence._id">{{ competence.nom }}</option>
-      </select>
-    </div>
+  
+    
     <button type="submit" class="btn btn-primary">Créer</button>
   </form>
 </div>

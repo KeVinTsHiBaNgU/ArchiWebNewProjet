@@ -1,11 +1,10 @@
 
 import { CompetenceService } from './../../../services/competence.service';
-
+import { ResultatService } from './../../../services/resultat.service';
 import { UserService} from '../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from '../../../services/projet.service';
 import  {User}  from 'backend/models/User';
-
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
@@ -17,12 +16,14 @@ export class StudentDashboardComponent implements OnInit {
   competencesacquises: any[]=[];
   autre_projets!: any[];
   projetsInscrits!: any[];
-  userId?:string
+  userId?:string;
+  resultats: any[]=[];
 
   constructor(
     private userService: UserService,
     private projetService: ProjetService,
-    private competenceService: CompetenceService
+    private competenceService: CompetenceService,
+    private resultatService: ResultatService
   ) { }
 
   ngOnInit() {
@@ -47,6 +48,10 @@ export class StudentDashboardComponent implements OnInit {
      this.projetService.getOtherProjets().subscribe((data: any[]) => {
       this.autre_projets = data;
     });
+      // Charger les compétences depuis le service compétence
+      this.resultatService.getResultats().subscribe((data: any[]) => {
+        this.resultats = data;
+      });
 
   }
   sInscrire(projetId: string): void {
@@ -66,5 +71,7 @@ export class StudentDashboardComponent implements OnInit {
       }
     );
   }
+
+
 
 }

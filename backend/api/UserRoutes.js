@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 // Middleware d'authentification
-//router.use(authMiddleware);
+router.use(authMiddleware);
 
 // Fonction pour générer un id_user unique
 function generateUniqueUserId() {
