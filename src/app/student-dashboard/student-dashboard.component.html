@@ -6,27 +6,30 @@
     <table id="userTable" class="table">
       <thead>
         <tr>
-          <th> Competence</th>
+          <th>Competence</th>
           <th>etat</th>
           <th>Resultat</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let result of resultats ">
           <td>{{result.competence.nom }}</td>
-          <td>{{result.note }}</td>
+          <td>{{result.resultat }}</td>
           <td>
-            <button class="btn btn-primary" >Voir</button>
+            {{result.note }}
+          </td>
+          <td>
+            <button class="btn btn-primary me-2" (click)="editResult(result.competence._id)">Modifier</button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    <h3>Les projets inscrits</h3>
   <table id="userTable" class="table">
     <thead>
       <tr>
         <th>Nom</th>
-        <th>Actions</th>
       </tr>
     </thead>
     <tbody>

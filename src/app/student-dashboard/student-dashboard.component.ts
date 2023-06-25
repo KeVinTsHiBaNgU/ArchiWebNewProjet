@@ -5,6 +5,7 @@ import { UserService} from '../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from '../../../services/projet.service';
 import  {User}  from 'backend/models/User';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
@@ -19,11 +20,13 @@ export class StudentDashboardComponent implements OnInit {
   userId?:string;
   resultats: any[]=[];
 
+
   constructor(
     private userService: UserService,
     private projetService: ProjetService,
     private competenceService: CompetenceService,
-    private resultatService: ResultatService
+    private resultatService: ResultatService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -71,7 +74,10 @@ export class StudentDashboardComponent implements OnInit {
       }
     );
   }
-
+  editResult(competenceId: string) {
+    // Redirigez vers la page de modification du projet avec l'identifiant du projet en tant que paramètre
+    this.router.navigate(['result/edit/', competenceId]);
+  } 
 
 
 }

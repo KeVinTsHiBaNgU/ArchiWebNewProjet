@@ -13,11 +13,8 @@ router.post('/new', async (req, res) => {
     console.log(req.body)
     const enseignant = await Promise.resolve(req.user);
     const { nom, description, competences } = req.body;
-    const nouveauProjet = new Projet({ nom, description, enseignant });
-    for (let compet of competences) {
-      const competence = await Competence.findById(compet);
-      nouveauProjet.competences.push(competence);
-    }
+    const nouveauProjet = new Projet({ nom, description, enseignant, competences });
+    console.log(competences);
 
     await nouveauProjet.save();
     return res.status(200).json(nouveauProjet);
@@ -30,10 +27,12 @@ router.post('/new', async (req, res) => {
 
 // POST /projet/inscription
 // POST /projet/inscription
+
+
 router.post('/inscription', async (req, res) => {
   try {
-    const etudiant= await Promise.resolve(req.user);
-    const { projetId} = req.body;
+    const etudiant = await Promise.resolve(req.user);
+    const { projetId } = req.body;
 
     // Vérifier si le projet existe
     const projet = await Projet.findById(projetId).populate("competences");
@@ -41,33 +40,57 @@ router.post('/inscription', async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
+    // Filtrer les compétences non acquises par l'étudiant
+    const competencesNonAcquises = projet.competences.filter(competence => {
+      // Vérifier si l'étudiant a déjà acquis cette compétence
+      return !etudiant.competencesAcquises.includes(competence._id);
+    });
 
     // Ajouter l'étudiant à la liste des étudiants inscrits du projet
-    projet.etudiantsInscrits.push(etudiant);
-    console.log(etudiant);
-    await projet.save();
-    let etud_modif= await User.findOne( { email: etudiant.email});
-    // Ajouter le projet à la liste des projets inscrits de l'étudiant
-    etud_modif.projetsInscrits.push(projet);
-    console.log(etud_modif.name);
-    await etud_modif.save();
-    for (let competence of projet.competences){
-      const nouveauResultat = new Resultat({
-        etudiant: etud_modif._id,
-        competence: competence._Id,
-        resultat: "non acquis",
-        note: 0,
-      });
-  
-       await nouveauResultat.save();
+    if (!projet.etudiantsInscrits.includes(etudiant._id)) {
+      projet.etudiantsInscrits.push(etudiant);
     }
+    await projet.save();
+
+    // Ajouter le projet à la liste des projets inscrits de l'étudiant
+    if (!etudiant.projetsInscrits.includes(projet._id)) {
+      etudiant.projetsInscrits.push(projet);
+    }
+    await etudiant.save();
+
+    // Ajouter les nouvelles compétences non acquises à l'étudiant
+    for (let competence of competencesNonAcquises) {
+      if (!etudiant.competencesAcquises.includes(competence._id)) {
+        etudiant.competencesAcquises.push(competence);
+      }
+    }
+    await etudiant.save();
+
+    // Créer les résultats pour les nouvelles compétences non acquises
+    for (let competence of competencesNonAcquises) {
+      const existingResult = await Resultat.findOne({
+        etudiant: etudiant._id,
+        competence: competence._id
+      });
+
+      if (!existingResult) {
+        const nouveauResultat = new Resultat({
+          etudiant: etudiant._id,
+          competence: competence._id,
+          resultat: "non_acquis",
+          note: 0,
+        });
+
+        await nouveauResultat.save();
+      }
+    }
+
     res.status(200).json({ message: 'Étudiant inscrit au projet avec succès' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Une erreur s\'est produite lors de l\'inscription à un projet' });
   }
 });
-
 
 
 // Route pour récupérer tous les projets
@@ -125,14 +148,36 @@ router.get('/:id', (req, res) => {
 });
 
 // Route pour mettre à jour un projet
-router.put('/:id', (req, res) => {
-  const projetId = req.params.id;
-  const { nom, description, enseignant, competences} = req.body;
-  Projet.findByIdAndUpdate(projetId)
+router.put('/:id', async (req, res) => {
+  try {
+    const projetId = req.params.id;
+    const { nom, description, competences } = req.body;
+    console.log(competences);
     
+<<<<<<< HEAD
+    const proj = await Projet.findById(projetId).populate("competences");
+    
+    if (!proj) {
+      return res.status(404).json({ message: "Projet non trouvé" });
+    }
+    
+    proj.nom = nom;
+    proj.description = description;
+    
+    proj.competences = competences; // Remplacer l'ancien tableau de compétences par le nouveau
+    
+    const updatedProjet = await proj.save();
+    
+    res.json(updatedProjet);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur lors de la mise à jour du projet" });
+  }
+=======
     .catch(err => res.status(500).json({ error: err.message }));
 
 
+>>>>>>> 678375aad824f603b79d243cd284b2dddc8d0eae
 });
 
 // Route pour supprimer un projet

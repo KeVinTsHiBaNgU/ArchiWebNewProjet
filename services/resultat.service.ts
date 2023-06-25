@@ -41,4 +41,15 @@ export class ResultatService {
     const url = `${this.apiUrl}/${competenceId}`;
     return this.http.delete(url, {headers});
   }
+  updateResultat(resultat: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.apiUrl}/${resultat._id}`;
+    const result={
+      "resulat": resultat.resultat,
+      "note": resultat.note
+
+    }
+    return this.http.put<any>(url, resultat,{headers});
+  }
 }

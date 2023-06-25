@@ -61,22 +61,29 @@ router.post('/new', async (req, res) => {
   }
 });
 
-// Route pour supprimer un résultat par l'ID de l'étudiant et de la compétence
-router.delete('/:competenceId', async (req, res) => {
+router.put('/:Id', async (req, res) => {
   try {
-    const user=req.user;
-    const resultatSupprime = await Resultat.findOneAndDelete({
-      etudiant: user._id,
-      competence: req.params.competenceId
-    }).exec();
+    const competenceId = req.params.Id;
 
-    if (resultatSupprime) {
-      res.json({ message: 'Résultat supprimé avec succès' });
-    } else {
-      res.status(404).json({ message: 'Résultat non trouvé' });
+    const { resultat, note } = req.body;
+
+    // Vérifier si le résultat existe
+    const resultatExistant = await Resultat.findById(competenceId);
+
+    if (!resultatExistant) {
+      return res.status(404).json({ message: 'Résultat non trouvé' });
     }
+
+    // Mettre à jour le résultat
+    resultatExistant.resultat = resultat;
+    resultatExistant.note = note;
+
+    const resultatModifie = await resultatExistant.save();
+
+    res.json(resultatModifie);
   } catch (error) {
-    res.status(500).json({ message: 'Erreur lors de la suppression du résultat' });
+    console.log(error);
+    res.status(500).json({ message: 'Erreur lors de la modification du résultat' });
   }
 });
 

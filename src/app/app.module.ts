@@ -20,6 +20,7 @@ import { ViewProjetComponent } from './view-projet/view-projet.component';
 import { ViewCompetenceComponent } from './view-competence/view-competence.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResultatEditComponent } from './resultat-edit/resultat-edit.component';
 
 
 
@@ -50,6 +51,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ViewCompetenceComponent,
     EditProjetComponent,
     UserProfileComponent,
+    ResultatEditComponent
     
   ],
   providers: [],
