@@ -130,7 +130,7 @@ router.put('/:id', (req, res) => {
   const { nom, description, enseignant, competences} = req.body;
   Projet.findByIdAndUpdate(projetId)
     
-    .catch(err => res.status(500).json({ error: err.message }));}
+    .catch(err => res.status(500).json({ error: err.message }));
 
 
 });
