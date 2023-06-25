@@ -22,6 +22,7 @@
       <select id="role" name="role" [(ngModel)]="role" required>
         <option value="teacher">Enseignant</option>
         <option value="student">Etudiant</option>
+        <option value="admin">admin</option>
       </select>
     </div>
     <button type="submit" [disabled]="!userForm.valid">Ajouter</button>

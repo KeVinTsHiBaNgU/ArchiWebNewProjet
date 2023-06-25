@@ -1,3 +1,4 @@
+import { ProjetStudentComponent } from './projet-student/projet-student.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateProjetComponent } from './create-projet/create-projet.component';
@@ -13,6 +14,7 @@ import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { UserProfileComponent  } from './user-profile/user-profile.component';
 import { ResultatEditComponent } from './resultat-edit/resultat-edit.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: "login", component: AdminLoginComponent },
@@ -26,7 +28,8 @@ const routes: Routes = [
   { path: "student/dashboard", component:  StudentDashboardComponent },
   { path: 'projet/edit/:id', component: EditProjetComponent },
   { path: 'user/profile', component: UserProfileComponent  },
-  { path: 'result/edit/:id', component: ResultatEditComponent }
+  { path: 'result/edit/:id', component: ResultatEditComponent },
+  { path: 'projet/details/:id', component: ProjetStudentComponent }
  
 ];
 

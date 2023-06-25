@@ -9,7 +9,6 @@
           <th>Competence</th>
           <th>etat</th>
           <th>Resultat</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +18,7 @@
           <td>
             {{result.note }}
           </td>
-          <td>
-            <button class="btn btn-primary me-2" (click)="editResult(result.competence._id)">Modifier</button>
-          </td>
+
         </tr>
       </tbody>
     </table>
@@ -30,14 +27,18 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th>Enseignat</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let projet of projetsInscrits ">
         <td>{{ projet.nom }}</td>
+
+          <td>{{ projet.enseignant.name }}</td>
         
-        <td>
-          <button class="btn btn-primary" >Voir</button>
+          <td>
+          <button class="btn btn-primary" (click)="projetDetail(projet._id)">Voir</button>
         </td>
       </tr>
     </tbody>

@@ -16,7 +16,7 @@ export class StudentDashboardComponent implements OnInit {
   allProjects!: any[];
   competencesacquises: any[]=[];
   autre_projets!: any[];
-  projetsInscrits!: any[];
+  projetsInscrits: any[]= [];
   userId?:string;
   resultats: any[]=[];
 
@@ -24,7 +24,6 @@ export class StudentDashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private projetService: ProjetService,
-    private competenceService: CompetenceService,
     private resultatService: ResultatService,
     private router: Router
   ) { }
@@ -37,7 +36,12 @@ export class StudentDashboardComponent implements OnInit {
         if(this.user.CompetencesAcquises !== null && this.user.CompetencesAcquises !== undefined)
         this.competencesacquises=this.user.CompetencesAcquises;
         if(this.user.projetsInscrits !== null && this.user.projetsInscrits !== undefined)
-        this.projetsInscrits=this.user.projetsInscrits;
+       for (let projet of this.user.projetsInscrits)
+       {
+        this.projetService.getProjetById(projet._id).subscribe((data: any) => {
+          this.projetsInscrits.push(data);
+        });
+       };
         
         
        
@@ -66,6 +70,7 @@ export class StudentDashboardComponent implements OnInit {
         // Succès de l'inscription au projet
         console.log('Inscription réussie');
         // Effectuer les actions supplémentaires nécessaires, par exemple actualiser la liste des projets, etc.
+        location.reload();
       },
       (error) => {
         // Erreur lors de l'inscription au projet
@@ -74,10 +79,9 @@ export class StudentDashboardComponent implements OnInit {
       }
     );
   }
-  editResult(competenceId: string) {
+  projetDetail(competenceId: string) {
     // Redirigez vers la page de modification du projet avec l'identifiant du projet en tant que paramètre
-    this.router.navigate(['result/edit/', competenceId]);
+    this.router.navigate(['projet/details/', competenceId]);
   } 
-
 
 }

@@ -98,7 +98,7 @@ router.get('/other', async (req, res) => {
   try {
     const etudiant = await Promise.resolve(req.user);
   Projet.find({ etudiantsInscrits: { $nin: [etudiant._id] } })
-    .populate('enseignant','name') // Récupère les informations de l'enseignant associé
+    .populate('enseignant') // Récupère les informations de l'enseignant associé
     .then(projets => {
       if (!projets) {
         return res.status(404).json({ message: 'Projet non trouvé' });
@@ -136,8 +136,9 @@ router.get('/:id', (req, res) => {
   const projetId = req.params.id;
 
   Projet.findById(projetId)
-    .populate('enseignant', 'nom prenom') // Récupère les informations de l'enseignant associé
-    .populate('etudiantsInscrits', 'nom prenom') // Récupère les informations des étudiants inscrits
+    .populate('enseignant') // Récupère les informations de l'enseignant associé
+    .populate('etudiantsInscrits')
+    .populate("competences") 
     .then(projet => {
       if (!projet) {
         return res.status(404).json({ message: 'Projet non trouvé' });

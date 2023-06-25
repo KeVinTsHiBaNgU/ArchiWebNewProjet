@@ -21,6 +21,7 @@ import { ViewCompetenceComponent } from './view-competence/view-competence.compo
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResultatEditComponent } from './resultat-edit/resultat-edit.component';
+import { ProjetStudentComponent } from './projet-student/projet-student.component';
 
 
 
@@ -51,7 +52,8 @@ import { ResultatEditComponent } from './resultat-edit/resultat-edit.component';
     ViewCompetenceComponent,
     EditProjetComponent,
     UserProfileComponent,
-    ResultatEditComponent
+    ResultatEditComponent,
+    ProjetStudentComponent
     
   ],
   providers: [],

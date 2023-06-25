@@ -1,0 +1,25 @@
+<h1 *ngIf="projet">Voici vos notes dans le projet {{projet.nom}} :</h1>
+<br>
+<h3>Resultats </h3>  
+    <table id="userTable" class="table">
+      <thead>
+        <tr>
+          <th>Competence</th>
+          <th>etat</th>
+          <th>Resultat</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of resultats ">
+          <td>{{result.competence.nom }}</td>
+          <td>{{result.resultat }}</td>
+          <td>
+            {{result.note }}
+          </td>
+          <td>
+            <button class="btn btn-primary me-2" (click)="editResult(result.competence._id)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
