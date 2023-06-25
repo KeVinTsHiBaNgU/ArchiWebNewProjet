@@ -52,4 +52,12 @@ export class ResultatEditComponent implements OnInit {
       }
     );
   }
+  constrainNoteValue() {
+    if (this.resultat.note < 0) {
+      this.resultat.note = 0;
+    } else if (this.resultat.note > 100) {
+      this.resultat.note = 100;
+    }
+  }
+  
 }
