@@ -154,7 +154,6 @@ router.put('/:id', async (req, res) => {
     const { nom, description, competences } = req.body;
     console.log(competences);
     
-<<<<<<< HEAD
     const proj = await Projet.findById(projetId).populate("competences");
     
     if (!proj) {
@@ -173,11 +172,6 @@ router.put('/:id', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Erreur lors de la mise à jour du projet" });
   }
-=======
-    .catch(err => res.status(500).json({ error: err.message }));
-
-
->>>>>>> 678375aad824f603b79d243cd284b2dddc8d0eae
 });
 
 // Route pour supprimer un projet
