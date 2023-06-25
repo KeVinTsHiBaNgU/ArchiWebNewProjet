@@ -6,6 +6,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Description</th>
       <th scope="col">Enseignant</th>
+      <th scope="col">Compétences</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <td>{{ projet.nom }}</td>
       <td>{{ projet.description }}</td>
       <td>{{ projet.enseignant.name }} {{ projet.enseignant.id }}</td>
+      <td>{{ projet.competences.nom }} </td>
       <td>
         <!-- <button class="btn btn-primary" (click)="loadProjet(projet._id)">Editer</button> -->
         <button class="btn btn-primary" (click)="editProjet(projet._id)">Editer</button>
