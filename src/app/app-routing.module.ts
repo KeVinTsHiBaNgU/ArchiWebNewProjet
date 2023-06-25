@@ -9,6 +9,7 @@ import { AdminLoginComponent } from '../../components/admin-login/admin-login.co
 import { AdminDashboardComponent } from '../../components/admin-dashboard/admin-dashboard.component';
 import { EnseignantDashboardComponent } from '../../components/enseignant-dashboard/enseignant-dashboard.component';
 import { CreateCompetenceComponent } from './create-competence/create-competence.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: "view/competence", component:  ViewCompetenceComponent },
   { path: "user/new", component:  CreateUserComponent },
   { path: "student/dashboard", component:  StudentDashboardComponent },
-  { path: 'projet/edit/:id', component: CreateProjetComponent }
+  { path: 'projet/edit/:id', component: EditProjetComponent }
  
 ];
 

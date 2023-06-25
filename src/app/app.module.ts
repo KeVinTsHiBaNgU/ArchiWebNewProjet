@@ -18,6 +18,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { ViewProjetComponent } from './view-projet/view-projet.component';
 import { ViewCompetenceComponent } from './view-competence/view-competence.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
 
 
 
@@ -46,6 +47,7 @@ import { ViewCompetenceComponent } from './view-competence/view-competence.compo
     StudentDashboardComponent,
     ViewProjetComponent,
     ViewCompetenceComponent,
+    EditProjetComponent,
     
   ],
   providers: [],
