@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import  {User}  from 'backend/models/User';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Router } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -15,7 +21,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -27,8 +33,7 @@ export class UserProfileComponent implements OnInit {
   
 
     this.userService.getCurrentUser().subscribe(
-      (response) => {
-        const user = response?.data; // Vérifiez que la réponse contient un objet 'data' contenant les informations utilisateur
+      (user: User) => {
         if (user) {
           this.profileForm.patchValue({
             name: user.name,
@@ -67,6 +72,7 @@ export class UserProfileComponent implements OnInit {
         this.profileForm.reset();
         this.submitted = false;
         this.successMessage = 'Les informations du compte ont été modifiées avec succès.';
+        Swal.fire('Modifié', 'Le projet a été modifié avec succès', 'success');
       },
       error => {
         // Gérer les erreurs de mise à jour du compte

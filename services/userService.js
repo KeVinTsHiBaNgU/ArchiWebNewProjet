@@ -18,7 +18,7 @@ async function login(email, password) {
   if (!user.projetsCrees) {
     user.projetsCrees = []; // Initialise la propriété projetsCrees avec un tableau vide s'il est null
   }
-  console.log(user.role);
+console.log(user.role);
 
   if (!user) {
     return null;

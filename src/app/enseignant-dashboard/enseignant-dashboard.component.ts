@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service'; 
+import { AuthService } from '../../../services/auth.service'; 
 // import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -13,7 +14,7 @@ import { UserService } from '../../../services/user.service';
 export class EnseignantDashboardComponent {
   etudiants!: any[];
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.getEtudiants(); // Appelez la méthode pour récupérer les étudiants lors de l'initialisation du composant
@@ -37,4 +38,7 @@ export class EnseignantDashboardComponent {
     this.router.navigate(['/user/profile']);
   }
 
+  logout() {
+    this.authService.logout(); // Appeler la méthode logout() du service AuthService
+  }
 }

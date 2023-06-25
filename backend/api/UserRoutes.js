@@ -63,7 +63,11 @@ router.put('/profile', async (req, res) => {
     // Mettez à jour les informations de l'utilisateur
     user.name = name;
     user.email = email;
-    user.password = password;
+    
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
+    }
 
     // Enregistrez les modifications dans la base de données
     await user.save();
