@@ -108,22 +108,34 @@ router.get('/etudiants', async (req, res) => {
   }
 });
 
+// Supprimer un utilisateur par l'administrateur
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await User.findByIdAndDelete(userId);
+    res.json({ message: 'Utilisateur supprimé avec succès' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la suppression de l\'utilisateur' });
+  }
+});
+
 
 
 // Route pour récupérer les utilisateurs étudiants et enseignants
   router.get('/users',  async (req, res) => {
     try {
       const users = await User.find().populate("competencesAcquises").populate("projetsInscrits").populate("projetsCrees")
-      if (!user.competencesAcquises) {
-        user.competencesAcquises = []; // Initialise la propriété competencesAcquises avec un tableau vide s'il est null
+      if (!users.competencesAcquises) {
+        users.competencesAcquises = []; 
       }
       
-      if (!user.projetsInscrits) {
-        user.projetsInscrits = []; // Initialise la propriété projetsInscrits avec un tableau vide s'il est null
+      if (!users.projetsInscrits) {
+        users.projetsInscrits = []; 
       }
       
-      if (!user.projetsCrees) {
-        user.projetsCrees = []; // Initialise la propriété projetsCrees avec un tableau vide s'il est null
+      if (!users.projetsCrees) {
+        users.projetsCrees = []; 
       };
       
       res.status(200).json(users);

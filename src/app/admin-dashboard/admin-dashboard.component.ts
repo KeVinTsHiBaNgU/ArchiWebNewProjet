@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service'; 
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -16,6 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private userService: UserService, private formBuilder: FormBuilder, private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
+    this.getUsers();
     this.userService.getAllUsers().subscribe((data: any[]) => {
       // Filtrer les utilisateurs pour exclure l'administrateur
       this.users = data.filter(user => user.role !== 'admin');
@@ -34,7 +36,6 @@ export class AdminDashboardComponent implements OnInit {
       role: this.userForm.value.role,
     };
   }
-
   
   getUsers() {
     this.userService.getUsers().subscribe((users) => {
@@ -42,6 +43,36 @@ export class AdminDashboardComponent implements OnInit {
       this.users = users.filter((user) => user.role === 'teacher' || user.role === 'student');
     });
   }
+
+
+  deleteUser(userId: string) {
+    Swal.fire({
+      title: 'Supprimer utilisateur',
+      text: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(userId).subscribe(() => {
+          Swal.fire({
+            title: 'Utilisateur supprimé',
+            text: 'L\'utilisateur a été supprimé avec succès',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+          });
+          this.getUsers(); 
+        });
+      }
+    });
+  }
+  
+
+  
 
   logout() {
     this.authService.logout(); // Appeler la méthode logout() du service AuthService

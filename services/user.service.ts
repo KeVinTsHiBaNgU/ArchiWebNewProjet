@@ -23,7 +23,9 @@ export class UserService {
   }
 
   getEtudiants(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/etudiants');
+    const token = localStorage.getItem('token');
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(this.apiUrl + '/etudiants', { headers });
   }
   
   getUser(userId: string): Observable<User[]> {
@@ -57,5 +59,11 @@ export class UserService {
      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.apiUrl}/${userId}/role`;
     return this.http.get<any>(url, { headers });
+  }
+
+  deleteUser(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`, { headers });
   }
 }

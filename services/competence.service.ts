@@ -26,8 +26,10 @@ export class CompetenceService {
   }
 
   deleteCompetence(competenceId: string) {
-    const url = `${this.apiUrl}/competences/delete/${competenceId}`;
-    return this.http.delete(url);
+    const token = localStorage.getItem('token');
+     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.apiUrl}/delete/${competenceId}`;
+    return this.http.delete(url, {headers});
   }
 
   createCompetence(competence: any): Observable<any> {
